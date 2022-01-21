@@ -1,0 +1,21 @@
+Aplikace na evidenci oprav zbrani, pozdeji mozna i aut. 
+
+-formular na vyplneni:
+Jmeno, prijmeni
+Telefon/mail na zakaznika
+Datum prijeti
+Datum do kdy opravu vyridit
+Druh zbozi k oprave
+Co tomu je
+Pozadovane reseni
+Predokladana cena
+
+Tento formular by byl propojeny budto s mailem nebo s tiskarnou, abych to mohl tisknout zakaznikovi jako potvrzeni o prijeti do servisu nebo by se mu to poslalu do mailu.
+
+Dal bych od toho chtel, aby to bylo schopny vyhodnocovat casovou prioritu, abych vedel, co uz hori  aco ne. Treba posledni 4 dny by uz polozka svitila zlute a posledni den treba cervene a ja bych mel.prehled o mnozstvi prace.
+
+Kdyby se dalo jeste kazdou polozku rozkliknout a kliknout nekde na "vyrizeno" a mit tam misto na popis, co se s tim delo, jaky dily se pouzily a kolik to stalo, bylo by to top.
+
++ by to idealne mohlo umet na zaklade jednoho kliku odeslat predvyplnenou sms, do ktere by se jen automaticky doplnila informace o cene, ze je oprava hotova a zaznamenalo by to, kdy se sms odeslala, abych mel orehled o datu vyrizeni.
+
+No a jak jsme se bavili. Kdyby byo mozny do aplikace kouknout z telefonu na dalku, tak win win. Mohl bych se z postele divat, jestli stoji za to z ni vubec vstavat. 😆
