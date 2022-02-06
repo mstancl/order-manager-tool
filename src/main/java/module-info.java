@@ -11,4 +11,7 @@ module com.mstancl.ordermanagertool {
 
     exports com.mstancl.ordermanagertool.mainScreen;
     opens com.mstancl.ordermanagertool.mainScreen to javafx.fxml;
+
+    exports com.mstancl.ordermanagertool.order;
+    opens com.mstancl.ordermanagertool.order to javafx.fxml;
 }

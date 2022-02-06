@@ -1,10 +1,19 @@
 package com.mstancl.ordermanagertool.mainScreen;
 
+import com.mstancl.ordermanagertool.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class MainScreenController {
 
@@ -26,7 +35,7 @@ public class MainScreenController {
 
 
     @FXML
-    public void addNewOrder() {
+    public void addNewOrder() throws IOException {
         System.out.println(orderCounter);
 
 
@@ -37,7 +46,7 @@ public class MainScreenController {
         orderGrid_grid.getRowConstraints().add(orderCounter,newOrderRow);*/
 
 
-        orderGrid_grid.add(new TextArea(),0,orderCounter);
+        /*orderGrid_grid.add(new TextArea(),0,orderCounter);
         orderGrid_grid.add(new TextArea(),1,orderCounter);
         orderGrid_grid.add(new TextArea(),2,orderCounter);
         orderGrid_grid.add(new DatePicker(),3,orderCounter);
@@ -49,8 +58,16 @@ public class MainScreenController {
         orderGrid_grid.add(new Button("Add order"),9,orderCounter);
 
 
-        orderCounter++;
+        orderCounter++;*/
 
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
+        Parent root1 = fxmlLoader.load();
+        Stage stage = new Stage();
+     /*   stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);*/
+        stage.setTitle("ABC");
+        stage.setScene(new Scene(root1));
+        stage.show();
 
 
     }
