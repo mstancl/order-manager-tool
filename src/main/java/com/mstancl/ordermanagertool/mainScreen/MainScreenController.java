@@ -1,6 +1,7 @@
 package com.mstancl.ordermanagertool.mainScreen;
 
 import com.mstancl.ordermanagertool.Main;
+import com.mstancl.ordermanagertool.data.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainScreenController {
 
@@ -26,6 +29,7 @@ public class MainScreenController {
 
 
     public int orderCounter = 1;
+    public List<Order> listOfOrders = new ArrayList<>();
 
     @FXML
     public GridPane orderGrid_grid;

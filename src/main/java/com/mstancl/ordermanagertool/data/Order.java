@@ -1,26 +1,28 @@
 package com.mstancl.ordermanagertool.data;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class Order {
 
     private Customer customer;
-    private Calendar dateWhenReceived;
-    private Calendar dueDate;
-    private String kindOfOrder;
+    private LocalDate dateWhenReceived;
+    private LocalDate dueDate;
+    private String orderType;
     private String descriptionOfOrder;
     private String solutionForOrder;
     private int estimatedPrice;
     private int orderID;
+    private Status status;
 
-    public Order(Customer customer, Calendar dateWhenReceived, Calendar dueDate, String kindOfOrder, String descriptionOfOrder, String solutionForOrder, int estimatedPrice) {
+    public Order(Customer customer, LocalDate dateWhenReceived, LocalDate dueDate, String kindOfOrder, String descriptionOfOrder, String solutionForOrder, int estimatedPrice,Status status) {
         this.customer = customer;
         this.dateWhenReceived = dateWhenReceived;
         this.dueDate = dueDate;
-        this.kindOfOrder = kindOfOrder;
+        this.orderType = kindOfOrder;
         this.descriptionOfOrder = descriptionOfOrder;
         this.solutionForOrder = solutionForOrder;
         this.estimatedPrice = estimatedPrice;
+        this.status = status;
     }
 
     public Customer getCustomer() {
@@ -31,28 +33,28 @@ public class Order {
         this.customer = customer;
     }
 
-    public Calendar getDateWhenReceived() {
+    public LocalDate getDateWhenReceived() {
         return dateWhenReceived;
     }
 
-    public void setDateWhenReceived(Calendar dateWhenReceived) {
+    public void setDateWhenReceived(LocalDate dateWhenReceived) {
         this.dateWhenReceived = dateWhenReceived;
     }
 
-    public Calendar getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Calendar dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public String getKindOfOrder() {
-        return kindOfOrder;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public void setKindOfOrder(String kindOfOrder) {
-        this.kindOfOrder = kindOfOrder;
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public String getDescriptionOfOrder() {
@@ -85,5 +87,13 @@ public class Order {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

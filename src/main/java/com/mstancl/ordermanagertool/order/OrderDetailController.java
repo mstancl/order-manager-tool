@@ -1,17 +1,16 @@
 package com.mstancl.ordermanagertool.order;
 
+import com.mstancl.ordermanagertool.data.Customer;
+import com.mstancl.ordermanagertool.data.Order;
+import com.mstancl.ordermanagertool.data.OrderFields;
 import com.mstancl.ordermanagertool.data.Status;
 import com.mstancl.ordermanagertool.mainScreen.MainScreenController;
 import com.mstancl.ordermanagertool.util.FXMLoaderManager;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
-import javafx.scene.layout.StackPane;
-import javafx.stage.Popup;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -62,61 +61,24 @@ public class OrderDetailController {
 
         mainScreenController.orderGrid_grid.getRowConstraints().add(mainScreenController.orderCounter, newOrderRow);
 
-        TextField customerName = new TextField(StringUtils.capitalize(firstName_textField.getText()) + " " + StringUtils.capitalize(surname_textField.getText()));
-        customerName.setEditable(false);
-
-        TextField phoneNumber = new TextField(phoneNumber_textField.getText());
-        phoneNumber.setEditable(false);
-
-        TextField emailAddress = new TextField(emailAddress_textField.getText());
-        emailAddress.setEditable(false);
-
-        DatePicker dateWhenReceived = new DatePicker(dateWhenReceived_datePicker.getValue());
-        dateWhenReceived.setEditable(false);
-
-        dateWhenReceived.setOnMouseClicked(e -> {
-            if (!dateWhenReceived.isEditable())
-                dateWhenReceived.hide();
-        });
-
-        DatePicker dueDate = new DatePicker(dueDate_datePicker.getValue());
-        dueDate.setEditable(false);
-
-        dueDate.setOnMouseClicked(e -> {
-            if (!dueDate.isEditable())
-                dueDate.hide();
-        });
+        Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText()) + " " + StringUtils.capitalize(surname_textField.getText()), phoneNumber_textField.getText(), emailAddress_textField.getText());
+        Order order = new Order(customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
+        OrderFields orderFields = new OrderFields(order);
 
 
-        TextField orderType = new TextField(orderType_textField.getText());
-        orderType.setEditable(false);
-
-        TextField description = new TextField(description_textArea.getText());
-        description.setEditable(false);
-        description.setTooltip(new Tooltip(description_textArea.getText()));
-
-        TextField solution = new TextField(solution_textArea.getText());
-        solution.setEditable(false);
-        solution.setTooltip(new Tooltip(solution_textArea.getText()));
-
-        TextField estimatedPrice = new TextField(estimatedPrice_textField.getText());
-        estimatedPrice.setEditable(false);
-
-        TextField status = new TextField(Status.IN_PROGRESS.getName());
-        status.setEditable(false);
-
-        mainScreenController.orderGrid_grid.add(customerName, 0, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(phoneNumber, 1, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(emailAddress, 2, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(dateWhenReceived, 3, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(dueDate, 4, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderType, 5, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(description, 6, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(solution, 7, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(estimatedPrice, 8, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(status, 9, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getCustomerName_textField(), 0, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getPhoneNumber_textField(), 1, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getEmailAddress_textField(), 2, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getDateWhenReceived_datePicker(), 3, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getDueDate_datePicker(), 4, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getOrderType_textField(), 5, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getDescription_textArea(), 6, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getSolution_textArea(), 7, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getEstimatedPrice_textField(), 8, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderFields.getStatus_textField(), 9, mainScreenController.orderCounter);
 
         mainScreenController.orderCounter++;
+        mainScreenController.listOfOrders.add(order);
 
         mainScreenController.orderDetailsStage.close();
 
