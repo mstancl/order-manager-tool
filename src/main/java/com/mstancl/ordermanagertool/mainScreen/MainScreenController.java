@@ -39,7 +39,6 @@ public class MainScreenController {
 
     @FXML
     public void addNewOrder() throws IOException {
-        System.out.println(orderCounter);
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
         Parent root = fxmlLoader.load();
