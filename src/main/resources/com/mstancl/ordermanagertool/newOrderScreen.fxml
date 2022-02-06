@@ -67,32 +67,32 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxWidth="150.0">
+                  <TextField fx:id="firstName_textField" maxWidth="150.0">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField maxWidth="150.0" GridPane.rowIndex="1">
+                  <TextField fx:id="emailAddress_textField" maxWidth="150.0" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField maxWidth="150.0" GridPane.columnIndex="1">
+                  <TextField fx:id="surname_textField" maxWidth="150.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="phoneNumber_textField" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField maxWidth="150.0" GridPane.rowIndex="3">
+                  <TextField fx:id="orderType_textField" maxWidth="150.0" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="estimatedPrice_textField" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
@@ -137,12 +137,12 @@
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Label>
-                  <DatePicker prefWidth="150.0" GridPane.rowIndex="2">
+                  <DatePicker fx:id="dateWhenReceived_datePicker" prefWidth="150.0" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                   </DatePicker>
-                  <DatePicker prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <DatePicker fx:id="dueDate_datePicker" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
@@ -168,12 +168,12 @@
                         <Insets bottom="120.0" left="20.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextArea maxHeight="130.0" maxWidth="600.0" minHeight="130.0" minWidth="600.0" prefHeight="130.0" prefWidth="600.0">
+                  <TextArea fx:id="description_textArea" maxHeight="130.0" maxWidth="600.0" minHeight="130.0" minWidth="600.0" prefHeight="130.0" prefWidth="600.0">
                      <GridPane.margin>
                         <Insets left="20.0" top="60.0" />
                      </GridPane.margin>
                   </TextArea>
-                  <TextArea maxHeight="130.0" maxWidth="600.0" minHeight="130.0" minWidth="600.0" prefHeight="130.0" prefWidth="600.0" GridPane.rowIndex="1">
+                  <TextArea fx:id="solution_textArea" maxHeight="130.0" maxWidth="600.0" minHeight="130.0" minWidth="600.0" prefHeight="130.0" prefWidth="600.0" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" top="60.0" />
                      </GridPane.margin>

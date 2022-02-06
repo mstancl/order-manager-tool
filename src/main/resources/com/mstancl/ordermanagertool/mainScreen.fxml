@@ -135,6 +135,14 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
+                  <Label text="Status" GridPane.columnIndex="9">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
                </children>
             </GridPane>
             <ScrollPane fx:id="orderGrid" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
