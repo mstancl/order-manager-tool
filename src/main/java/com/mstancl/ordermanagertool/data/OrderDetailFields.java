@@ -4,9 +4,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 
-import java.time.LocalDate;
-
-public class OrderFields {
+public class OrderDetailFields {
     TextField customerName_textField;
 
     TextField phoneNumber_textField;
@@ -28,7 +26,7 @@ public class OrderFields {
     TextField status_textField;
 
 
-    public OrderFields(Order order) {
+    public OrderDetailFields(Order order) {
         setCustomerName_textField(new TextField(order.getCustomer().getFullName()));
         setPhoneNumber_textField(new TextField(order.getCustomer().getPhoneNumber()));
         setEmailAddress_textField(new TextField(order.getCustomer().getEmail()));
