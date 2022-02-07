@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class Order {
 
+    private long id;
     private Customer customer;
     private LocalDate dateWhenReceived;
     private LocalDate dueDate;
@@ -16,7 +17,8 @@ public class Order {
     private int orderID;
     private Status status;
 
-    public Order(Customer customer, LocalDate dateWhenReceived, LocalDate dueDate, String kindOfOrder, String descriptionOfOrder, String solutionForOrder, int estimatedPrice,Status status) {
+    public Order(long id,Customer customer, LocalDate dateWhenReceived, LocalDate dueDate, String kindOfOrder, String descriptionOfOrder, String solutionForOrder, int estimatedPrice,Status status) {
+        this.id = id;
         this.customer = customer;
         this.dateWhenReceived = dateWhenReceived;
         this.dueDate = dueDate;
@@ -25,6 +27,14 @@ public class Order {
         this.solutionForOrder = solutionForOrder;
         this.estimatedPrice = estimatedPrice;
         this.status = status;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Customer getCustomer() {

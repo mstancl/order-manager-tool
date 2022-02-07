@@ -66,68 +66,73 @@
          <children>
             <GridPane gridLinesVisible="true" maxHeight="-Infinity" GridPane.rowIndex="1">
               <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" maxWidth="100.0" minWidth="100.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="50.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="NEVER" percentWidth="40.0" />
+                <ColumnConstraints hgrow="NEVER" percentWidth="90.0" />
+                  <ColumnConstraints percentWidth="90.0" />
+                  <ColumnConstraints percentWidth="80.0" />
+                  <ColumnConstraints percentWidth="100.0" />
+                  <ColumnConstraints percentWidth="100.0" />
+                  <ColumnConstraints percentWidth="100.0" />
+                  <ColumnConstraints percentWidth="100.0" />
+                  <ColumnConstraints percentWidth="100.0" />
+                  <ColumnConstraints percentWidth="80.0" />
+                  <ColumnConstraints percentWidth="69.0" />
+                  <ColumnConstraints percentWidth="41.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="-Infinity" percentHeight="100.0" vgrow="NEVER" />
               </rowConstraints>
                <children>
-                  <Label text="Customer name">
+                  <Label text="Customer name" GridPane.columnIndex="1">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Phone number" GridPane.columnIndex="1">
+                  <Label text="Phone number" GridPane.columnIndex="2">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Email" GridPane.columnIndex="2">
+                  <Label text="Email" GridPane.columnIndex="3">
                      <padding>
-                        <Insets left="50.0" />
+                        <Insets left="20.0" />
                      </padding>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Date when received" GridPane.columnIndex="3">
+                  <Label text="Date when received" GridPane.columnIndex="4">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Due date" GridPane.columnIndex="4">
+                  <Label text="Due date" GridPane.columnIndex="5">
                      <padding>
-                        <Insets left="50.0" />
+                        <Insets left="40.0" />
                      </padding>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Kind of the order" GridPane.columnIndex="5">
+                  <Label text="Type of order" GridPane.columnIndex="6">
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Description" GridPane.columnIndex="7">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Description" GridPane.columnIndex="6">
+                  <Label text="Solution" GridPane.columnIndex="8">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Solution" GridPane.columnIndex="7">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Estimated price" GridPane.columnIndex="8">
+                  <Label text="Estimated price" GridPane.columnIndex="9">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -135,12 +140,17 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Status" GridPane.columnIndex="9">
+                  <Label text="Status" GridPane.columnIndex="10">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                      <padding>
                         <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="ID">
+                     <padding>
+                        <Insets left="20.0" />
                      </padding>
                   </Label>
                </children>
@@ -149,16 +159,18 @@
                <content>
                   <GridPane fx:id="orderGrid_grid" hgap="10.0" maxHeight="40.0" vgap="10.0">
                     <columnConstraints>
+                      <ColumnConstraints hgrow="ALWAYS" maxWidth="137.0" minWidth="10.0" percentWidth="48.0" prefWidth="137.0" />
                       <ColumnConstraints hgrow="ALWAYS" maxWidth="137.0" minWidth="10.0" percentWidth="107.0" prefWidth="137.0" />
-                      <ColumnConstraints hgrow="ALWAYS" maxWidth="137.0" minWidth="10.0" percentWidth="107.0" prefWidth="137.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="144.0" minWidth="10.0" percentWidth="108.0" prefWidth="138.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="144.0" minWidth="10.0" percentWidth="108.0" prefWidth="138.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="167.0" minWidth="10.0" percentWidth="107.0" prefWidth="138.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="143.0" minWidth="10.0" percentWidth="109.0" prefWidth="137.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="145.0" minWidth="10.0" percentWidth="107.0" prefWidth="138.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="138.0" minWidth="10.0" percentWidth="108.0" prefWidth="137.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="98.0" minWidth="10.0" percentWidth="75.0" prefWidth="98.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="115.0" minWidth="10.0" percentWidth="64.0" prefWidth="40.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="144.0" minWidth="10.0" percentWidth="107.0" prefWidth="138.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="144.0" minWidth="10.0" percentWidth="96.0" prefWidth="138.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="167.0" minWidth="10.0" percentWidth="120.0" prefWidth="138.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="143.0" minWidth="10.0" percentWidth="120.0" prefWidth="137.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="145.0" minWidth="10.0" percentWidth="123.0" prefWidth="138.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="138.0" minWidth="10.0" percentWidth="119.0" prefWidth="137.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="98.0" minWidth="10.0" percentWidth="124.0" prefWidth="98.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="115.0" minWidth="10.0" percentWidth="94.0" prefWidth="40.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="115.0" minWidth="10.0" percentWidth="79.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="115.0" minWidth="10.0" percentWidth="47.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
