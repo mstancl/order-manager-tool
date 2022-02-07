@@ -66,16 +66,16 @@ public class OrderDetailController {
         OrderDetailFields orderDetailFields = new OrderDetailFields(order);
 
 
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 0, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 1, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 2, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 3, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 4, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 5, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 6, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 7, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 8, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getStatus_textField(), 9, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 1, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 2, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 3, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 4, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 5, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 6, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 7, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 8, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 9, mainScreenController.orderCounter);
+        mainScreenController.orderGrid_grid.add(orderDetailFields.getStatus_textField(), 10, mainScreenController.orderCounter);
 
         mainScreenController.orderCounter++;
         mainScreenController.listOfOrders.add(order);
