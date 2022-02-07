@@ -1,10 +1,10 @@
-package com.mstancl.ordermanagertool.order;
+package com.mstancl.ordermanagertool.screens.order;
 
-import com.mstancl.ordermanagertool.data.Customer;
-import com.mstancl.ordermanagertool.data.Order;
+import com.mstancl.ordermanagertool.data.pojo.Customer;
+import com.mstancl.ordermanagertool.data.pojo.Order;
 import com.mstancl.ordermanagertool.data.OrderDetailFields;
 import com.mstancl.ordermanagertool.data.Status;
-import com.mstancl.ordermanagertool.mainScreen.MainScreenController;
+import com.mstancl.ordermanagertool.screens.mainScreen.MainScreenController;
 import com.mstancl.ordermanagertool.util.FXMLoaderManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

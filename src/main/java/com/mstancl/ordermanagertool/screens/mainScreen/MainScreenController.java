@@ -1,7 +1,7 @@
-package com.mstancl.ordermanagertool.mainScreen;
+package com.mstancl.ordermanagertool.screens.mainScreen;
 
 import com.mstancl.ordermanagertool.Main;
-import com.mstancl.ordermanagertool.data.Order;
+import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,5 +1,6 @@
 package com.mstancl.ordermanagertool.data;
 
+import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
