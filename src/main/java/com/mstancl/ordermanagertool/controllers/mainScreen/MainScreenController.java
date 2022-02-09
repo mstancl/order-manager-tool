@@ -1,4 +1,4 @@
-package com.mstancl.ordermanagertool.screens.mainScreen;
+package com.mstancl.ordermanagertool.controllers.mainScreen;
 
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.data.pojo.Order;
