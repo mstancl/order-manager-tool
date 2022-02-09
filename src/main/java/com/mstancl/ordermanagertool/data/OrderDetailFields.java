@@ -2,10 +2,14 @@ package com.mstancl.ordermanagertool.data;
 
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 
 public class OrderDetailFields {
+
+    Label id_label;
+
     TextField customerName_textField;
 
     TextField phoneNumber_textField;
@@ -28,6 +32,8 @@ public class OrderDetailFields {
 
 
     public OrderDetailFields(Order order) {
+
+        setId_label(new Label(Long.toString(order.getId())));
         setCustomerName_textField(new TextField(order.getCustomer().getFullName()));
         setPhoneNumber_textField(new TextField(order.getCustomer().getPhoneNumber()));
         setEmailAddress_textField(new TextField(order.getCustomer().getEmail()));
@@ -40,6 +46,13 @@ public class OrderDetailFields {
         setStatus_textField(new TextField(order.getStatus().getName()));
     }
 
+    public Label getId_label() {
+        return id_label;
+    }
+
+    public void setId_label(Label id_label) {
+        this.id_label = id_label;
+    }
 
     public TextField getCustomerName_textField() {
         return customerName_textField;
