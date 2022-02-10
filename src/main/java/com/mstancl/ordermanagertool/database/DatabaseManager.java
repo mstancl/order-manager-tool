@@ -57,7 +57,6 @@ public class DatabaseManager {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             stmt.execute(sqlQuery);
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -81,7 +80,6 @@ public class DatabaseManager {
             pstmt.setLong(10, order.getEstimatedPrice());
             pstmt.setString(11, order.getStatus().getName());
             pstmt.executeUpdate();
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -108,7 +106,6 @@ public class DatabaseManager {
                         Status.getStatusByName(rs.getString("STATUS"))
                 ));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

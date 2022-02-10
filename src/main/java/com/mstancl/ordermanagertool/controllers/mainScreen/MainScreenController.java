@@ -3,8 +3,6 @@ package com.mstancl.ordermanagertool.controllers.mainScreen;
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.OrderDetailFields;
-import com.mstancl.ordermanagertool.data.Status;
-import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +14,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainScreenController {
@@ -32,16 +31,51 @@ public class MainScreenController {
     public Button editOrder_button;
 
     @FXML
-    public Button deleteOrder_button;
-
-    @FXML
     public GridPane orderGrid_grid;
 
     public Stage orderDetailsStage;
 
     public int orderCounter = 1;
+
     public List<Order> listOfOrders = new ArrayList<>();
+    public List<OrderDetailFields> listOfOrderFields = new ArrayList<>();
+
     private final OrderDAO orderDAO = new OrderDAO();
+
+    RowConstraints newOrderRow = new RowConstraints();
+
+
+    @FXML
+    public void initialize() {
+        removeAllRowsFromOrderGrid();
+
+        newOrderRow.setVgrow(Priority.NEVER);
+        newOrderRow.setMaxHeight(40);
+
+        for (Order order : orderDAO.getAllRecords()) {
+
+            orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
+
+            OrderDetailFields orderDetailFields = new OrderDetailFields(order);
+
+            orderGrid_grid.add(orderDetailFields.getId_label(), 1, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 2, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 3, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 4, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 5, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 6, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 7, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 8, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 9, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 10, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getStatus_textField(), 11, orderCounter);
+
+            orderCounter++;
+            listOfOrders.add(order);
+            listOfOrderFields.add(orderDetailFields);
+        }
+    }
+
 
     @FXML
     public void addNewOrder() throws IOException {
@@ -56,47 +90,94 @@ public class MainScreenController {
 
     }
 
+
     @FXML
     public void editOrder() {
-        System.out.println("TEST EDIT");
+
+        List<Order> sortedList = orderDAO.getAllRecords();
+
+        sortedList.sort(Comparator.comparing(Order::getId).reversed());
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
-    public void deleteOrder() {
-        System.out.println("TEST DELETE");
+    public void orderByID() {
+        List<Order> sortedList = orderDAO.getAllRecords();
+
+        sortedList.sort(Comparator.comparing(Order::getId).reversed());
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
-    public void initialize() {
+    public void orderByDateWhenReceived() {
+        List<Order> sortedList = orderDAO.getAllRecords();
 
-        System.out.println("Initializing...");
-        for (Order order : orderDAO.getAllRecords()) {
+        sortedList.sort(Comparator.comparing(Order::getDateWhenReceived).reversed());
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(sortedList);
+    }
 
-            RowConstraints newOrderRow = new RowConstraints();
-            newOrderRow.setVgrow(Priority.NEVER);
-            newOrderRow.setMaxHeight(40);
+    @FXML
+    public void orderByDueDate() {
+        List<Order> sortedList = orderDAO.getAllRecords();
+
+        sortedList.sort(Comparator.comparing(Order::getDueDate).reversed());
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(sortedList);
+    }
+
+
+    @FXML
+    public void orderByEstimatedPrice() {
+        List<Order> sortedList = orderDAO.getAllRecords();
+
+        sortedList.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(sortedList);
+    }
+
+    private void addOrdersToOrderGrid(List<Order> sortedList) {
+        for (Order order : sortedList) {
 
             orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
-
             OrderDetailFields orderDetailFields = new OrderDetailFields(order);
 
-            orderGrid_grid.add(orderDetailFields.getId_label(), 0, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 1, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 2, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 3, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 4, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 5, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 6, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 7, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 8, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 9, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getStatus_textField(), 10, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getId_label(), 1, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 2, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 3, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 4, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 5, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 6, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 7, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 8, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 9, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 10, orderCounter);
+            orderGrid_grid.add(orderDetailFields.getStatus_textField(), 11, orderCounter);
 
             orderCounter++;
             listOfOrders.add(order);
+            listOfOrderFields.add(orderDetailFields);
         }
+    }
 
-
+    private void removeAllRowsFromOrderGrid() {
+        for (OrderDetailFields orderDetailFields : listOfOrderFields) {
+            orderGrid_grid.getChildren().remove(orderDetailFields.getId_label());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getCustomerName_textField());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getPhoneNumber_textField());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getEmailAddress_textField());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getDateWhenReceived_datePicker());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getDueDate_datePicker());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getOrderType_textField());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getDescription_textArea());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getSolution_textArea());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getEstimatedPrice_textField());
+            orderGrid_grid.getChildren().remove(orderDetailFields.getStatus_textField());
+        }
+        listOfOrderFields = new ArrayList<>();
+        orderCounter = 0;
     }
 
 
