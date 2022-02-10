@@ -1,24 +1,30 @@
 package com.mstancl.ordermanagertool.database;
 
+import com.mstancl.ordermanagertool.data.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseManager {
 
 
     private Connection conn;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     private Connection getConnection() {
         return conn;
     }
 
-  /*  public static void main(String[] args) {
+    public static void main(String[] args) {
         DatabaseManager databaseManager = new DatabaseManager();
-        databaseManager.createNewTable("test.db", "Orders", "ID INT PRIMARY KEY     NOT NULL", "CUSTOMER_NAME           TEXT    NOT NULL", "CUSTOMER_PHONE           TEXT    NOT NULL", "CUSTOMER_EMAIL           TEXT    NOT NULL", "DATE_WHEN_RECEIVED            INT     NOT NULL", "DATE_WHEN_DUE            INT     NOT NULL", "ORDER_TYPE           TEXT    NOT NULL", "DESCRIPTION           TEXT    NOT NULL", "SOLUTION           TEXT    NOT NULL", "ESTIMATED_PRICE           INT    NOT NULL", "STATUS           TEXT    NOT NULL");
-    }*/
+        databaseManager.returnAllRecords("test.db", "Orders");
+        //databaseManager.createNewTable("test.db", "Orders", "ID INT PRIMARY KEY     NOT NULL", "CUSTOMER_NAME           TEXT    NOT NULL", "CUSTOMER_PHONE           TEXT    NOT NULL", "CUSTOMER_EMAIL           TEXT    NOT NULL", "DATE_WHEN_RECEIVED            INT     NOT NULL", "DATE_WHEN_DUE            INT     NOT NULL", "ORDER_TYPE           TEXT    NOT NULL", "DESCRIPTION           TEXT    NOT NULL", "SOLUTION           TEXT    NOT NULL", "ESTIMATED_PRICE           INT    NOT NULL", "STATUS           TEXT    NOT NULL");
+    }
 
     private Connection connect(String databaseName) {
         String url = "jdbc:sqlite:" + databaseName;
@@ -51,6 +57,7 @@ public class DatabaseManager {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             stmt.execute(sqlQuery);
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -58,7 +65,7 @@ public class DatabaseManager {
 
     public void insert(String databaseName, Order order) {
         String sql = "INSERT INTO Orders(ID,CUSTOMER_NAME,CUSTOMER_PHONE,CUSTOMER_EMAIL,DATE_WHEN_RECEIVED,DATE_WHEN_DUE,ORDER_TYPE,DESCRIPTION,SOLUTION,ESTIMATED_PRICE,STATUS) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
         try {
             Connection conn = connect(databaseName);
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -74,9 +81,38 @@ public class DatabaseManager {
             pstmt.setLong(10, order.getEstimatedPrice());
             pstmt.setString(11, order.getStatus().getName());
             pstmt.executeUpdate();
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<Order> returnAllRecords(String databaseName, String tableName) {
+        String sql = "SELECT * FROM " + tableName;
+        List<Order> listOfOrders = new ArrayList<>();
+        try {
+            Connection conn = connect(databaseName);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+
+                Customer customer = new Customer(rs.getString("CUSTOMER_NAME"), rs.getString("CUSTOMER_PHONE"), rs.getString("CUSTOMER_EMAIL"));
+                listOfOrders.add(new Order(rs.getLong("ID"),
+                        customer,
+                        LocalDate.parse(Long.toString(rs.getLong("DATE_WHEN_RECEIVED")), formatter),
+                        LocalDate.parse(Long.toString(rs.getLong("DATE_WHEN_DUE")), formatter),
+                        rs.getString("ORDER_TYPE"),
+                        rs.getString("DESCRIPTION"),
+                        rs.getString("SOLUTION"),
+                        rs.getInt("ESTIMATED_PRICE"),
+                        Status.getStatusByName(rs.getString("STATUS"))
+                ));
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return listOfOrders;
     }
 
 

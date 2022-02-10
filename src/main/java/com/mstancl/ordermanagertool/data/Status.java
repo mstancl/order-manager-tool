@@ -14,9 +14,18 @@ public enum Status {
         this.name = name;
     }
 
-
     public String getName() {
         return this.name;
     }
+
+    public static Status getStatusByName(String name) {
+        for (Status status : values()) {
+            if (status.getName().equals(name)) {
+                return status;
+            }
+        }
+        return null;
+    }
+
 
 }

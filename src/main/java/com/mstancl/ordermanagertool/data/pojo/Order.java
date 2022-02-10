@@ -16,12 +16,12 @@ public class Order {
     private int estimatedPrice;
     private Status status;
 
-    public Order(long id,Customer customer, LocalDate dateWhenReceived, LocalDate dueDate, String kindOfOrder, String descriptionOfOrder, String solutionForOrder, int estimatedPrice,Status status) {
+    public Order(long id,Customer customer, LocalDate dateWhenReceived, LocalDate dueDate, String orderType, String descriptionOfOrder, String solutionForOrder, int estimatedPrice,Status status) {
         this.id = id;
         this.customer = customer;
         this.dateWhenReceived = dateWhenReceived;
         this.dueDate = dueDate;
-        this.orderType = kindOfOrder;
+        this.orderType = orderType;
         this.descriptionOfOrder = descriptionOfOrder;
         this.solutionForOrder = solutionForOrder;
         this.estimatedPrice = estimatedPrice;

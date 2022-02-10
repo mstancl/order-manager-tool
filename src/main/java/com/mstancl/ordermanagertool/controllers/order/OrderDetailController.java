@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 public class OrderDetailController {
 
 
-    private OrderDAO orderDAO = new OrderDAO();
+    private final OrderDAO orderDAO = new OrderDAO();
 
     @FXML
     public Button confirmOrder_button;
