@@ -2,9 +2,10 @@ package com.mstancl.ordermanagertool.data;
 
 public enum Status {
 
-    NEW("new"),
+    NEW("New"),
     IN_PROGRESS("In progress"),
     DONE("Done"),
+    ARCHIVED76("Archived"),
     CANCELLED("Cancelled");
 
     private final String name;

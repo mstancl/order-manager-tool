@@ -14,7 +14,6 @@ public class Order {
     private String descriptionOfOrder;
     private String solutionForOrder;
     private int estimatedPrice;
-    private int orderID;
     private Status status;
 
     public Order(long id,Customer customer, LocalDate dateWhenReceived, LocalDate dueDate, String kindOfOrder, String descriptionOfOrder, String solutionForOrder, int estimatedPrice,Status status) {
@@ -93,13 +92,6 @@ public class Order {
         this.estimatedPrice = estimatedPrice;
     }
 
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
 
     public Status getStatus() {
         return status;

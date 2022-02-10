@@ -18,6 +18,7 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1020);
 
         stage.setTitle("Order manager");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
