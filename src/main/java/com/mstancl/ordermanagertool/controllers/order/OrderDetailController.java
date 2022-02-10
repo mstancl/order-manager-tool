@@ -65,7 +65,7 @@ public class OrderDetailController {
         mainScreenController.orderGrid_grid.getRowConstraints().add(mainScreenController.orderCounter, newOrderRow);
 
         Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText()) + " " + StringUtils.capitalize(surname_textField.getText()), phoneNumber_textField.getText(), emailAddress_textField.getText());
-        Order order = new Order(mainScreenController.orderCounter, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
+        Order order = new Order(mainScreenController.orderCounter+1, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
         OrderDetailFields orderDetailFields = new OrderDetailFields(order);
 
         mainScreenController.orderGrid_grid.add(orderDetailFields.getId_label(), 1, mainScreenController.orderCounter);
