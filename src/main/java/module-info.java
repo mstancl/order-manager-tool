@@ -4,9 +4,10 @@ module com.mstancl.ordermanagertool {
     requires org.apache.commons.lang3;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
+    requires com.google.common;
 
 
-    opens com.mstancl.ordermanagertool to javafx.fxml;
+
     exports com.mstancl.ordermanagertool;
 
     exports com.mstancl.ordermanagertool.data;

@@ -1,5 +1,6 @@
 package com.mstancl.ordermanagertool.controllers.mainScreen;
 
+import com.google.common.collect.Comparators;
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.OrderDetailFields;
@@ -44,7 +45,6 @@ public class MainScreenController {
 
     RowConstraints newOrderRow = new RowConstraints();
 
-
     @FXML
     public void initialize() {
         removeAllRowsFromOrderGrid();
@@ -52,28 +52,7 @@ public class MainScreenController {
         newOrderRow.setVgrow(Priority.NEVER);
         newOrderRow.setMaxHeight(40);
 
-        for (Order order : orderDAO.getAllRecords()) {
-
-            orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
-
-            OrderDetailFields orderDetailFields = new OrderDetailFields(order);
-
-            orderGrid_grid.add(orderDetailFields.getId_label(), 1, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 2, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 3, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 4, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 5, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 6, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 7, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 8, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 9, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 10, orderCounter);
-            orderGrid_grid.add(orderDetailFields.getStatus_textField(), 11, orderCounter);
-
-            orderCounter++;
-            listOfOrders.add(order);
-            listOfOrderFields.add(orderDetailFields);
-        }
+        addOrdersToOrderGrid(orderDAO.getAllRecords());
     }
 
 
@@ -93,37 +72,46 @@ public class MainScreenController {
 
     @FXML
     public void editOrder() {
-
-        List<Order> sortedList = orderDAO.getAllRecords();
-
-        sortedList.sort(Comparator.comparing(Order::getId).reversed());
-        removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
     public void orderByID() {
-        List<Order> sortedList = orderDAO.getAllRecords();
+        List<Order> sortedList = listOfOrders;
 
-        sortedList.sort(Comparator.comparing(Order::getId).reversed());
+        if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getId))) {
+            sortedList.sort(Comparator.comparing(Order::getId).reversed());
+        } else {
+            sortedList.sort(Comparator.comparing(Order::getId));
+        }
+
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
     public void orderByDateWhenReceived() {
-        List<Order> sortedList = orderDAO.getAllRecords();
+        List<Order> sortedList = listOfOrders;
 
-        sortedList.sort(Comparator.comparing(Order::getDateWhenReceived).reversed());
+        if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getDateWhenReceived))) {
+            sortedList.sort(Comparator.comparing(Order::getDateWhenReceived).reversed());
+        } else {
+            sortedList.sort(Comparator.comparing(Order::getDateWhenReceived));
+        }
+
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
     public void orderByDueDate() {
-        List<Order> sortedList = orderDAO.getAllRecords();
+        List<Order> sortedList = listOfOrders;
 
-        sortedList.sort(Comparator.comparing(Order::getDueDate).reversed());
+        if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getDueDate))) {
+            sortedList.sort(Comparator.comparing(Order::getDueDate).reversed());
+        } else {
+            sortedList.sort(Comparator.comparing(Order::getDueDate));
+        }
+
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
     }
@@ -131,9 +119,14 @@ public class MainScreenController {
 
     @FXML
     public void orderByEstimatedPrice() {
-        List<Order> sortedList = orderDAO.getAllRecords();
+        List<Order> sortedList = listOfOrders;
 
-        sortedList.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
+        if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getEstimatedPrice))) {
+            sortedList.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
+        } else {
+            sortedList.sort(Comparator.comparing(Order::getEstimatedPrice));
+        }
+
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
     }
@@ -157,9 +150,9 @@ public class MainScreenController {
             orderGrid_grid.add(orderDetailFields.getStatus_textField(), 11, orderCounter);
 
             orderCounter++;
-            listOfOrders.add(order);
             listOfOrderFields.add(orderDetailFields);
         }
+        listOfOrders.addAll(sortedList);
     }
 
     private void removeAllRowsFromOrderGrid() {
@@ -177,6 +170,7 @@ public class MainScreenController {
             orderGrid_grid.getChildren().remove(orderDetailFields.getStatus_textField());
         }
         listOfOrderFields = new ArrayList<>();
+        listOfOrders = new ArrayList<>();
         orderCounter = 0;
     }
 
