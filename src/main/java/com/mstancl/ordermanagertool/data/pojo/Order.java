@@ -1,6 +1,6 @@
 package com.mstancl.ordermanagertool.data.pojo;
+import  com.mstancl.ordermanagertool.data.Status;
 
-import com.mstancl.ordermanagertool.data.Status;
 
 import java.time.LocalDate;
 
