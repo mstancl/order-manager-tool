@@ -19,3 +19,19 @@ Kdyby se dalo jeste kazdou polozku rozkliknout a kliknout nekde na "vyrizeno" a 
 + by to idealne mohlo umet na zaklade jednoho kliku odeslat predvyplnenou sms, do ktere by se jen automaticky doplnila informace o cene, ze je oprava hotova a zaznamenalo by to, kdy se sms odeslala, abych mel orehled o datu vyrizeni.
 
 No a jak jsme se bavili. Kdyby byo mozny do aplikace kouknout z telefonu na dalku, tak win win. Mohl bych se z postele divat, jestli stoji za to z ni vubec vstavat. 😆
+
+
+
+
+Pripominky TODO
+
+- Serazovani (podle sloupcu)
+- Vyhledavani (nove okenko?)
+- Print option behem tvorby orderu
+- Smazat delete tlacitko. Delete nebude mozny. Pouze archivace nebo edit
+- Vytvorit moznost statusu archivace
+- Vytvorit filtery. Defaultne neukazovat archivovane zaznamy
+- Napojit to na SQLIte databazi.
+
+- Potom co se dokonci(archivuje) order, zadat realne vyreseni problemu, atd. Kvuli archivaci
+
