@@ -39,6 +39,7 @@ public class MainScreenController {
     public Stage orderDetailsStage;
 
     public int orderCounter;
+    private int highLightedRowForModification = -1;
 
     public List<Order> listOfOrders = new ArrayList<>();
     public List<OrderDetailFields> listOfOrderFields = new ArrayList<>();
@@ -75,16 +76,19 @@ public class MainScreenController {
 
     @FXML
     public void editOrder() {
-        removeAllRowsFromOrderGrid();
+        if (highLightedRowForModification > 0) {
+
+        }
     }
 
     @FXML
     public void orderGridRowClicked(MouseEvent e) {
         Node source = e.getPickResult().getIntersectedNode();
-        int rowIndex = GridPane.getRowIndex(source);
+        Integer rowIndex = GridPane.getRowIndex(source);
         for (Node node : orderGrid_grid.getChildren()) {
-            if (GridPane.getRowIndex(node) == rowIndex && node instanceof Pane && GridPane.getColumnIndex(node) != 0 && GridPane.getColumnIndex(node) != 12) {
+            if (GridPane.getRowIndex(node).equals(rowIndex) && node instanceof Pane && GridPane.getColumnIndex(node) != 0 && GridPane.getColumnIndex(node) != 12) {
                 node.setStyle("-fx-border-color:#0000FF;");
+                highLightedRowForModification = rowIndex;
                 /*node.getStyleClass().clear();
                 node.setStyle(null);*/
             }

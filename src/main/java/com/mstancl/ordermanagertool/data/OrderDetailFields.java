@@ -1,6 +1,7 @@
 package com.mstancl.ordermanagertool.data;
 
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -35,6 +36,7 @@ public class OrderDetailFields {
     TextField status_textField;
 
     List<Pane> listOfPaneFields = new ArrayList<>();
+    List<Node> listOfAllNodes = new ArrayList<>();
 
 
     public OrderDetailFields(Order order) {
@@ -58,6 +60,7 @@ public class OrderDetailFields {
 
     public void setId_label(Label id_label) {
         this.id_label = id_label;
+        this.listOfAllNodes.add(id_label);
     }
 
     public TextField getCustomerName_textField() {
@@ -67,6 +70,7 @@ public class OrderDetailFields {
     public void setCustomerName_textField(TextField customerName_textField) {
         this.customerName_textField = customerName_textField;
         this.customerName_textField.setEditable(false);
+        this.listOfAllNodes.add(customerName_textField);
     }
 
     public TextField getPhoneNumber_textField() {
@@ -76,6 +80,7 @@ public class OrderDetailFields {
     public void setPhoneNumber_textField(TextField phoneNumber_textField) {
         this.phoneNumber_textField = phoneNumber_textField;
         this.phoneNumber_textField.setEditable(false);
+        this.listOfAllNodes.add(phoneNumber_textField);
     }
 
     public TextField getEmailAddress_textField() {
@@ -85,6 +90,7 @@ public class OrderDetailFields {
     public void setEmailAddress_textField(TextField emailAddress_textField) {
         this.emailAddress_textField = emailAddress_textField;
         this.emailAddress_textField.setEditable(false);
+        this.listOfAllNodes.add(emailAddress_textField);
     }
 
     public DatePicker getDateWhenReceived_datePicker() {
@@ -94,6 +100,7 @@ public class OrderDetailFields {
     public void setDateWhenReceived_datePicker(DatePicker dateWhenReceived_datePicker) {
         this.dateWhenReceived_datePicker = dateWhenReceived_datePicker;
         this.dateWhenReceived_datePicker.setEditable(false);
+        this.listOfAllNodes.add(dateWhenReceived_datePicker);
 
         this.dateWhenReceived_datePicker.setOnMouseClicked(e -> {
             if (!this.dateWhenReceived_datePicker.isEditable())
@@ -110,6 +117,7 @@ public class OrderDetailFields {
     public void setDueDate_datePicker(DatePicker dueDate_datePicker) {
         this.dueDate_datePicker = dueDate_datePicker;
         this.dueDate_datePicker.setEditable(false);
+        this.listOfAllNodes.add(dueDate_datePicker);
         this.dueDate_datePicker.setOnMouseClicked(e -> {
             if (!this.dueDate_datePicker.isEditable())
                 this.dueDate_datePicker.hide();
@@ -124,6 +132,7 @@ public class OrderDetailFields {
     public void setOrderType_textField(TextField orderType_textField) {
         this.orderType_textField = orderType_textField;
         this.orderType_textField.setEditable(false);
+        this.listOfAllNodes.add(orderType_textField);
     }
 
     public TextField getDescription_textArea() {
@@ -133,6 +142,7 @@ public class OrderDetailFields {
     public void setDescription_textArea(TextField description_textArea) {
         this.description_textArea = description_textArea;
         this.description_textArea.setEditable(false);
+        this.listOfAllNodes.add(description_textArea);
         this.description_textArea.setTooltip(new Tooltip(description_textArea.getText()));
     }
 
@@ -143,6 +153,7 @@ public class OrderDetailFields {
     public void setSolution_textArea(TextField solution_textArea) {
         this.solution_textArea = solution_textArea;
         this.solution_textArea.setEditable(false);
+        this.listOfAllNodes.add(solution_textArea);
         this.solution_textArea.setTooltip(new Tooltip(solution_textArea.getText()));
     }
 
@@ -153,6 +164,7 @@ public class OrderDetailFields {
     public void setEstimatedPrice_textField(TextField estimatedPrice_textField) {
         this.estimatedPrice_textField = estimatedPrice_textField;
         this.estimatedPrice_textField.setEditable(false);
+        this.listOfAllNodes.add(estimatedPrice_textField);
     }
 
     public TextField getStatus_textField() {
@@ -162,6 +174,7 @@ public class OrderDetailFields {
     public void setStatus_textField(TextField status_textField) {
         this.status_textField = status_textField;
         this.status_textField.setEditable(false);
+        this.listOfAllNodes.add(status_textField);
     }
 
     public List<Pane> getListOfPaneFields() {
@@ -174,5 +187,9 @@ public class OrderDetailFields {
 
     public void addPaneToTheListOfPanes(Pane pane) {
         this.listOfPaneFields.add(pane);
+    }
+
+    public List<Node> getListOfAllNodes() {
+        return listOfAllNodes;
     }
 }
