@@ -36,7 +36,7 @@ public class MainScreenController {
 
     public Stage orderDetailsStage;
 
-    public int orderCounter = 1;
+    public int orderCounter;
 
     public List<Order> listOfOrders = new ArrayList<>();
     public List<OrderDetailFields> listOfOrderFields = new ArrayList<>();
@@ -72,6 +72,7 @@ public class MainScreenController {
 
     @FXML
     public void editOrder() {
+        removeAllRowsFromOrderGrid();
     }
 
     @FXML
