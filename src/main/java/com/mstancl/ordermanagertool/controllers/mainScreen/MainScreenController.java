@@ -84,7 +84,12 @@ public class MainScreenController {
         Node source = e.getPickResult().getIntersectedNode();
         Integer rowIndex = GridPane.getRowIndex(source);
         if (rowIndex != null) {
-            listOfOrderFields.get(rowIndex).setHighlightColor(listOfOrderFields.get(rowIndex).getHighlightColor()==null ? HighlightColor.BLUE : null);
+            for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
+                if (orderLineDetailFields.getHighlightColor() == HighlightColor.BLUE) {
+                    orderLineDetailFields.setHighlightColor(null);
+                }
+            }
+            listOfOrderFields.get(rowIndex).setHighlightColor(listOfOrderFields.get(rowIndex).getHighlightColor() == null ? HighlightColor.BLUE : null);
         }
     }
 
