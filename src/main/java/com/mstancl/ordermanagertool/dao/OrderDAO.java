@@ -28,4 +28,9 @@ public class OrderDAO implements IDAO<Order> {
     public List<Order> getAllRecords() {
         return databaseManager.returnAllRecords("test.db", "Orders");
     }
+
+    @Override
+    public Order getRecordByID(long id) {
+        return databaseManager.returnRecordByID("test.db", "Orders", id);
+    }
 }

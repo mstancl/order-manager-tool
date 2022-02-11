@@ -85,6 +85,30 @@ public class DatabaseManager {
         }
     }
 
+    public Order returnRecordByID(String databaseName, String tableName, long id) {
+        String sql = "SELECT * FROM " + tableName + " WHERE ID =" + id;
+        try {
+            Connection conn = connect(databaseName);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            Customer customer = new Customer(rs.getString("CUSTOMER_NAME").split(" ")[0], rs.getString("CUSTOMER_NAME").split(" ")[1], rs.getString("CUSTOMER_PHONE"), rs.getString("CUSTOMER_EMAIL"));
+            return new Order(rs.getLong("ID"),
+                    customer,
+                    LocalDate.parse(Long.toString(rs.getLong("DATE_WHEN_RECEIVED")), formatter),
+                    LocalDate.parse(Long.toString(rs.getLong("DATE_WHEN_DUE")), formatter),
+                    rs.getString("ORDER_TYPE"),
+                    rs.getString("DESCRIPTION"),
+                    rs.getString("SOLUTION"),
+                    rs.getInt("ESTIMATED_PRICE"),
+                    Status.getStatusByName(rs.getString("STATUS"))
+            );
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public List<Order> returnAllRecords(String databaseName, String tableName) {
         String sql = "SELECT * FROM " + tableName;
         List<Order> listOfOrders = new ArrayList<>();

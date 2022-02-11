@@ -12,4 +12,6 @@ public interface IDAO<T> {
 
     List<T> getAllRecords();
 
+    T getRecordByID(long id);
+
 }

@@ -57,12 +57,16 @@ public class OrderDetailController {
     public void confirmOrder() {
         MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
 
-        Customer customer = new Customer( StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()),StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()) , phoneNumber_textField.getText(), emailAddress_textField.getText());
+        Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
         Order order = new Order(mainScreenController.orderCounter + 1, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
 
         mainScreenController.addOrdersToOrderGrid(order);
 
-        orderDAO.write(order);
+        if (orderDAO.getRecordByID(order.getId()) == null) {
+            orderDAO.write(order);
+        } else {
+            orderDAO.update(order);
+        }
 
         mainScreenController.orderDetailsStage.close();
 

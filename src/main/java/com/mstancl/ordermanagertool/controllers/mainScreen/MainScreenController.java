@@ -7,7 +7,6 @@ import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
-import com.mstancl.ordermanagertool.util.FXMLoaderManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,7 +22,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -222,7 +220,7 @@ public class MainScreenController {
         Parent root = fxmlLoader.load();
         orderDetailsStage = new Stage();
         orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
-        orderDetailsStage.setTitle("ABC");
+        orderDetailsStage.setTitle("Order details");
         orderDetailsStage.setScene(new Scene(root));
         orderDetailsStage.show();
     }
@@ -232,7 +230,7 @@ public class MainScreenController {
         Parent root = fxmlLoader.load();
         orderDetailsStage = new Stage();
         orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
-        orderDetailsStage.setTitle("ABC");
+        orderDetailsStage.setTitle("Order details");
         orderDetailsStage.setScene(new Scene(root));
         orderDetailsStage.show();
 
