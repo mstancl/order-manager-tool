@@ -3,7 +3,7 @@ package com.mstancl.ordermanagertool.controllers.mainScreen;
 import com.google.common.collect.Comparators;
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
-import com.mstancl.ordermanagertool.data.OrderDetailFields;
+import com.mstancl.ordermanagertool.data.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +42,7 @@ public class MainScreenController {
     private int highLightedRowForModification = -1;
 
     public List<Order> listOfOrders = new ArrayList<>();
-    public List<OrderDetailFields> listOfOrderFields = new ArrayList<>();
+    public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
 
     private final OrderDAO orderDAO = new OrderDAO();
 
@@ -161,46 +161,46 @@ public class MainScreenController {
 
     public void addOrdersToOrderGrid(Order order) {
         orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
-        OrderDetailFields orderDetailFields = new OrderDetailFields(order);
+        OrderLineDetailFields orderLineDetailFields = new OrderLineDetailFields(order);
 
-        orderGrid_grid.add(orderDetailFields.getId_label(), 1, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 2, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 3, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 4, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 5, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 6, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 7, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 8, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 9, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 10, orderCounter);
-        orderGrid_grid.add(orderDetailFields.getStatus_textField(), 11, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getId_label(), 1, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getCustomerName_textField(), 2, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getPhoneNumber_textField(), 3, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getEmailAddress_textField(), 4, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getDateWhenReceived_datePicker(), 5, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getDueDate_datePicker(), 6, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getOrderType_textField(), 7, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getDescription_textArea(), 8, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getSolution_textArea(), 9, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getEstimatedPrice_textField(), 10, orderCounter);
+        orderGrid_grid.add(orderLineDetailFields.getStatus_textField(), 11, orderCounter);
 
         //to allow the mouse event to register which row/column was clicked
         for (int i = 0; i < 13; i++) {
             Pane pane = new Pane();
             orderGrid_grid.add(pane, i, orderCounter);
-            orderDetailFields.addPaneToTheListOfPanes(pane);
+            orderLineDetailFields.addPaneToTheListOfPanes(pane);
         }
 
         orderCounter++;
-        listOfOrderFields.add(orderDetailFields);
+        listOfOrderFields.add(orderLineDetailFields);
         listOfOrders.add(order);
     }
 
     private void removeAllRowsFromOrderGrid() {
-        for (OrderDetailFields orderDetailFields : listOfOrderFields) {
-            orderGrid_grid.getChildren().remove(orderDetailFields.getId_label());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getCustomerName_textField());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getPhoneNumber_textField());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getEmailAddress_textField());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getDateWhenReceived_datePicker());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getDueDate_datePicker());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getOrderType_textField());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getDescription_textArea());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getSolution_textArea());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getEstimatedPrice_textField());
-            orderGrid_grid.getChildren().remove(orderDetailFields.getStatus_textField());
-            orderGrid_grid.getChildren().removeAll(orderDetailFields.getListOfPaneFields());
+        for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getId_label());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getCustomerName_textField());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getPhoneNumber_textField());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getEmailAddress_textField());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getDateWhenReceived_datePicker());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getDueDate_datePicker());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getOrderType_textField());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getDescription_textArea());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getSolution_textArea());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getEstimatedPrice_textField());
+            orderGrid_grid.getChildren().remove(orderLineDetailFields.getStatus_textField());
+            orderGrid_grid.getChildren().removeAll(orderLineDetailFields.getListOfPaneFields());
         }
 
         listOfOrderFields = new ArrayList<>();

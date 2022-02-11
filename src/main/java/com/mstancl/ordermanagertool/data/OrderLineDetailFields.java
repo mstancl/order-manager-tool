@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailFields {
+public class OrderLineDetailFields {
 
     Label id_label;
 
@@ -39,7 +39,7 @@ public class OrderDetailFields {
     List<Node> listOfAllNodes = new ArrayList<>();
 
 
-    public OrderDetailFields(Order order) {
+    public OrderLineDetailFields(Order order) {
 
         setId_label(new Label(Long.toString(order.getId())));
         setCustomerName_textField(new TextField(order.getCustomer().getFullName()));
