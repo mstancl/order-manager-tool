@@ -2,10 +2,12 @@ package com.mstancl.ordermanagertool.controllers.mainScreen;
 
 import com.google.common.collect.Comparators;
 import com.mstancl.ordermanagertool.Main;
+import com.mstancl.ordermanagertool.controllers.order.OrderDetailController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.FXMLoaderManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,6 +23,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -49,6 +53,8 @@ public class MainScreenController {
 
     RowConstraints newOrderRow = new RowConstraints();
 
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
 
     @FXML
     public void initialize() {
@@ -63,20 +69,17 @@ public class MainScreenController {
 
     @FXML
     public void addNewOrder() throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
-        Parent root = fxmlLoader.load();
-        orderDetailsStage = new Stage();
-        orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
-        orderDetailsStage.setTitle("ABC");
-        orderDetailsStage.setScene(new Scene(root));
-        orderDetailsStage.show();
-
+        showOrderDetailsScreen();
     }
 
 
     @FXML
-    public void editOrder() {
+    public void editOrder() throws IOException {
+        for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
+            if (orderLineDetailFields.getHighlightColor() == HighlightColor.BLUE) {
+                showOrderDetailsScreen(orderLineDetailFields.getOrder());
+            }
+        }
     }
 
     @FXML
@@ -213,4 +216,39 @@ public class MainScreenController {
         return listOfOrders;
     }
 
+
+    private void showOrderDetailsScreen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        orderDetailsStage = new Stage();
+        orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
+        orderDetailsStage.setTitle("ABC");
+        orderDetailsStage.setScene(new Scene(root));
+        orderDetailsStage.show();
+    }
+
+    private void showOrderDetailsScreen(Order order) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        orderDetailsStage = new Stage();
+        orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
+        orderDetailsStage.setTitle("ABC");
+        orderDetailsStage.setScene(new Scene(root));
+        orderDetailsStage.show();
+
+        OrderDetailController orderDetailController = fxmlLoader.getController();
+
+        orderDetailController.getFirstName_textField().setText(order.getCustomer().getFirstName());
+        orderDetailController.getSurname_textField().setText(order.getCustomer().getSurname());
+        orderDetailController.getEmailAddress_textField().setText(order.getCustomer().getEmail());
+        orderDetailController.getPhoneNumber_textField().setText(order.getCustomer().getPhoneNumber());
+        orderDetailController.getDateWhenReceived_datePicker().setValue(order.getDateWhenReceived());
+        orderDetailController.getDueDate_datePicker().setValue(order.getDueDate());
+        orderDetailController.getOrderType_textField().setText(order.getOrderType());
+        orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
+        orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
+        orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
+
+
+    }
 }

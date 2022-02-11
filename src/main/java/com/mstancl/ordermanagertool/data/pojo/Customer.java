@@ -2,24 +2,34 @@ package com.mstancl.ordermanagertool.data.pojo;
 
 public class Customer {
 
-    private String fullName;
+    private String firstName;
+    private String surname;
     private String phoneNumber;
     private String email;
 
 
-    public Customer(String fullName, String phoneNumber, String email) {
-        this.fullName = fullName;
+    public Customer(String firstName, String surname, String phoneNumber, String email) {
+        this.firstName = firstName;
+        this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPhoneNumber() {

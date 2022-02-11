@@ -47,7 +47,7 @@ public class OrderLineDetailFields {
     public OrderLineDetailFields(Order order) {
         this.order = order;
         setId_label(new Label(Long.toString(order.getId())));
-        setCustomerName_textField(new TextField(order.getCustomer().getFullName()));
+        setCustomerName_textField(new TextField(order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname()));
         setPhoneNumber_textField(new TextField(order.getCustomer().getPhoneNumber()));
         setEmailAddress_textField(new TextField(order.getCustomer().getEmail()));
         setDateWhenReceived_datePicker(new DatePicker(order.getDateWhenReceived()));

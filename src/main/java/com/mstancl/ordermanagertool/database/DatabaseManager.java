@@ -69,7 +69,7 @@ public class DatabaseManager {
             Connection conn = connect(databaseName);
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, order.getId());
-            pstmt.setString(2, order.getCustomer().getFullName());
+            pstmt.setString(2, order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname());
             pstmt.setString(3, order.getCustomer().getPhoneNumber());
             pstmt.setString(4, order.getCustomer().getEmail());
             pstmt.setLong(5, Long.parseLong(order.getDateWhenReceived().format(formatter)));
@@ -94,7 +94,7 @@ public class DatabaseManager {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
 
-                Customer customer = new Customer(rs.getString("CUSTOMER_NAME"), rs.getString("CUSTOMER_PHONE"), rs.getString("CUSTOMER_EMAIL"));
+                Customer customer = new Customer(rs.getString("CUSTOMER_NAME").split(" ")[0], rs.getString("CUSTOMER_NAME").split(" ")[1], rs.getString("CUSTOMER_PHONE"), rs.getString("CUSTOMER_EMAIL"));
                 listOfOrders.add(new Order(rs.getLong("ID"),
                         customer,
                         LocalDate.parse(Long.toString(rs.getLong("DATE_WHEN_RECEIVED")), formatter),
