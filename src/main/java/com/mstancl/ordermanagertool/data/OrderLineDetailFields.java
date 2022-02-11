@@ -38,6 +38,10 @@ public class OrderLineDetailFields {
     List<Pane> listOfPaneFields = new ArrayList<>();
     List<Node> listOfAllNodes = new ArrayList<>();
 
+    private boolean highlightedForEdit;
+    private boolean highlightedRedAlert;
+    private boolean highlightedYellowAlert;
+
 
     public OrderLineDetailFields(Order order) {
 
