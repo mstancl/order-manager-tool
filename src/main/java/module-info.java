@@ -7,14 +7,17 @@ module com.mstancl.ordermanagertool {
     requires com.google.common;
 
 
-
     exports com.mstancl.ordermanagertool;
 
-    exports com.mstancl.ordermanagertool.data;
-    opens com.mstancl.ordermanagertool.data to javafx.fxml;
 
     exports com.mstancl.ordermanagertool.data.pojo;
     opens com.mstancl.ordermanagertool.data.pojo to javafx.fxml;
+
+    exports com.mstancl.ordermanagertool.data.orderLine;
+    opens com.mstancl.ordermanagertool.data.orderLine to javafx.fxml;
+
+    exports com.mstancl.ordermanagertool.data.enums;
+    opens com.mstancl.ordermanagertool.data.enums to javafx.fxml;
 
     exports com.mstancl.ordermanagertool.controllers.mainScreen;
     opens com.mstancl.ordermanagertool.controllers.mainScreen to javafx.fxml;

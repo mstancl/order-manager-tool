@@ -3,7 +3,7 @@ package com.mstancl.ordermanagertool.controllers.mainScreen;
 import com.google.common.collect.Comparators;
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
-import com.mstancl.ordermanagertool.data.OrderLineDetailFields;
+import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

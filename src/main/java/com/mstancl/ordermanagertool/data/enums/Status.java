@@ -1,4 +1,4 @@
-package com.mstancl.ordermanagertool.data;
+package com.mstancl.ordermanagertool.data.enums;
 
 public enum Status {
 

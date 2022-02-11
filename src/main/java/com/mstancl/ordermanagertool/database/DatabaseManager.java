@@ -1,6 +1,6 @@
 package com.mstancl.ordermanagertool.database;
 
-import com.mstancl.ordermanagertool.data.Status;
+import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 

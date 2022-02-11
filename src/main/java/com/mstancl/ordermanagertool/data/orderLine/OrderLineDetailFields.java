@@ -1,4 +1,4 @@
-package com.mstancl.ordermanagertool.data;
+package com.mstancl.ordermanagertool.data.orderLine;
 
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.scene.Node;

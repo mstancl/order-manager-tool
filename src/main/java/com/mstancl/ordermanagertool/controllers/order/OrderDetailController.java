@@ -2,7 +2,7 @@ package com.mstancl.ordermanagertool.controllers.order;
 
 import com.mstancl.ordermanagertool.controllers.mainScreen.MainScreenController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
-import com.mstancl.ordermanagertool.data.Status;
+import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import com.mstancl.ordermanagertool.util.FXMLoaderManager;
