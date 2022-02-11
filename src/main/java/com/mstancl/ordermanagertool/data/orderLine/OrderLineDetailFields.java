@@ -71,7 +71,7 @@ public class OrderLineDetailFields {
             }
         } else {
             for (Node node : listOfAllNodes) {
-                node.getStyleClass().clear();
+                //node.getStyleClass().clear();
                 node.setStyle(null);
             }
         }

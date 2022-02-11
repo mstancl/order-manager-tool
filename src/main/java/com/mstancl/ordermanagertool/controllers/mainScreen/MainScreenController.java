@@ -83,8 +83,9 @@ public class MainScreenController {
     public void orderGridRowClicked(MouseEvent e) {
         Node source = e.getPickResult().getIntersectedNode();
         Integer rowIndex = GridPane.getRowIndex(source);
-        if (rowIndex != null)
-            listOfOrderFields.get(rowIndex).setHighlightColor(HighlightColor.BLUE);
+        if (rowIndex != null) {
+            listOfOrderFields.get(rowIndex).setHighlightColor(listOfOrderFields.get(rowIndex).getHighlightColor()==null ? HighlightColor.BLUE : null);
+        }
     }
 
     @FXML
