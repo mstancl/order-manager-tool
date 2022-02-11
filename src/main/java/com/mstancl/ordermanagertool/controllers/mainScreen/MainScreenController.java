@@ -3,6 +3,7 @@ package com.mstancl.ordermanagertool.controllers.mainScreen;
 import com.google.common.collect.Comparators;
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
+import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainScreenController {
 
@@ -39,9 +41,8 @@ public class MainScreenController {
     public Stage orderDetailsStage;
 
     public int orderCounter;
-    private int highLightedRowForModification = -1;
 
-    public List<Order> listOfOrders = new ArrayList<>();
+    //public List<Order> listOfOrders = new ArrayList<>();
     public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
 
     private final OrderDAO orderDAO = new OrderDAO();
@@ -76,29 +77,25 @@ public class MainScreenController {
 
     @FXML
     public void editOrder() {
-        if (highLightedRowForModification > 0) {
-
-        }
     }
 
     @FXML
     public void orderGridRowClicked(MouseEvent e) {
         Node source = e.getPickResult().getIntersectedNode();
         Integer rowIndex = GridPane.getRowIndex(source);
-        for (Node node : orderGrid_grid.getChildren()) {
+
+        listOfOrderFields.get(rowIndex).highlight(HighlightColor.BLUE);
+
+       /* for (Node node : orderGrid_grid.getChildren()) {
             if (GridPane.getRowIndex(node).equals(rowIndex) && node instanceof Pane && GridPane.getColumnIndex(node) != 0 && GridPane.getColumnIndex(node) != 12) {
                 node.setStyle("-fx-border-color:#0000FF;");
-                highLightedRowForModification = rowIndex;
-                /*node.getStyleClass().clear();
-                node.setStyle(null);*/
             }
-        }
-
+        }*/
     }
 
     @FXML
     public void orderByID() {
-        List<Order> sortedList = listOfOrders;
+        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getId))) {
             sortedList.sort(Comparator.comparing(Order::getId).reversed());
@@ -112,7 +109,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByDateWhenReceived() {
-        List<Order> sortedList = listOfOrders;
+        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getDateWhenReceived))) {
             sortedList.sort(Comparator.comparing(Order::getDateWhenReceived).reversed());
@@ -126,7 +123,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByDueDate() {
-        List<Order> sortedList = listOfOrders;
+        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getDueDate))) {
             sortedList.sort(Comparator.comparing(Order::getDueDate).reversed());
@@ -141,7 +138,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByEstimatedPrice() {
-        List<Order> sortedList = listOfOrders;
+        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getEstimatedPrice))) {
             sortedList.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
@@ -184,7 +181,7 @@ public class MainScreenController {
 
         orderCounter++;
         listOfOrderFields.add(orderLineDetailFields);
-        listOfOrders.add(order);
+        //listOfOrders.add(order);
     }
 
     private void removeAllRowsFromOrderGrid() {
@@ -204,9 +201,16 @@ public class MainScreenController {
         }
 
         listOfOrderFields = new ArrayList<>();
-        listOfOrders = new ArrayList<>();
+        // listOfOrders = new ArrayList<>();
         orderCounter = 0;
     }
 
+    private List<Order> getListOfAllOrder() {
+        List<Order> listOfOrders = new ArrayList<>();
+        for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
+            listOfOrders.add(orderLineDetailFields.getOrder());
+        }
+        return listOfOrders;
+    }
 
 }

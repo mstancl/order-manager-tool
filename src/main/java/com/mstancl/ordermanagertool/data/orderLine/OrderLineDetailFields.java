@@ -1,5 +1,6 @@
 package com.mstancl.ordermanagertool.data.orderLine;
 
+import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
@@ -38,13 +39,15 @@ public class OrderLineDetailFields {
     List<Pane> listOfPaneFields = new ArrayList<>();
     List<Node> listOfAllNodes = new ArrayList<>();
 
+    private final Order order;
+
     private boolean highlightedForEdit;
     private boolean highlightedRedAlert;
     private boolean highlightedYellowAlert;
 
 
     public OrderLineDetailFields(Order order) {
-
+        this.order = order;
         setId_label(new Label(Long.toString(order.getId())));
         setCustomerName_textField(new TextField(order.getCustomer().getFullName()));
         setPhoneNumber_textField(new TextField(order.getCustomer().getPhoneNumber()));
@@ -56,6 +59,23 @@ public class OrderLineDetailFields {
         setSolution_textArea(new TextField(order.getSolutionForOrder()));
         setEstimatedPrice_textField(new TextField(String.valueOf(order.getEstimatedPrice())));
         setStatus_textField(new TextField(order.getStatus().getName()));
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void clearHighlight() {
+        for (Node node : listOfAllNodes) {
+            node.getStyleClass().clear();
+            node.setStyle(null);
+        }
+    }
+
+    public void highlight(HighlightColor highlightColor) {
+        for (Node node : listOfAllNodes) {
+            node.setStyle("-fx-border-color:" + highlightColor.getCode() + ";");
+        }
     }
 
     public Label getId_label() {
