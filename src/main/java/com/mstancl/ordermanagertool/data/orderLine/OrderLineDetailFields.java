@@ -41,9 +41,7 @@ public class OrderLineDetailFields {
 
     private final Order order;
 
-    private boolean highlightedForEdit;
-    private boolean highlightedRedAlert;
-    private boolean highlightedYellowAlert;
+    private HighlightColor highlightColor;
 
 
     public OrderLineDetailFields(Order order) {
@@ -61,21 +59,26 @@ public class OrderLineDetailFields {
         setStatus_textField(new TextField(order.getStatus().getName()));
     }
 
+    public HighlightColor getHighlightColor() {
+        return highlightColor;
+    }
+
+    public void setHighlightColor(HighlightColor highlightColor) {
+        this.highlightColor = highlightColor;
+        if (highlightColor != null) {
+            for (Node node : listOfAllNodes) {
+                node.setStyle("-fx-border-color:" + highlightColor.getCode() + ";");
+            }
+        } else {
+            for (Node node : listOfAllNodes) {
+                node.getStyleClass().clear();
+                node.setStyle(null);
+            }
+        }
+    }
+
     public Order getOrder() {
         return order;
-    }
-
-    public void clearHighlight() {
-        for (Node node : listOfAllNodes) {
-            node.getStyleClass().clear();
-            node.setStyle(null);
-        }
-    }
-
-    public void highlight(HighlightColor highlightColor) {
-        for (Node node : listOfAllNodes) {
-            node.setStyle("-fx-border-color:" + highlightColor.getCode() + ";");
-        }
     }
 
     public Label getId_label() {

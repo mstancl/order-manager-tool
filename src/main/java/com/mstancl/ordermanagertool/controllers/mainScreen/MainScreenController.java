@@ -83,14 +83,8 @@ public class MainScreenController {
     public void orderGridRowClicked(MouseEvent e) {
         Node source = e.getPickResult().getIntersectedNode();
         Integer rowIndex = GridPane.getRowIndex(source);
-
-        listOfOrderFields.get(rowIndex).highlight(HighlightColor.BLUE);
-
-       /* for (Node node : orderGrid_grid.getChildren()) {
-            if (GridPane.getRowIndex(node).equals(rowIndex) && node instanceof Pane && GridPane.getColumnIndex(node) != 0 && GridPane.getColumnIndex(node) != 12) {
-                node.setStyle("-fx-border-color:#0000FF;");
-            }
-        }*/
+        if (rowIndex != null)
+            listOfOrderFields.get(rowIndex).setHighlightColor(HighlightColor.BLUE);
     }
 
     @FXML
