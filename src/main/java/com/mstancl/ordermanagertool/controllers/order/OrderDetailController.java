@@ -1,17 +1,16 @@
 package com.mstancl.ordermanagertool.controllers.order;
 
+import com.mstancl.ordermanagertool.controllers.mainScreen.MainScreenController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
+import com.mstancl.ordermanagertool.data.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
-import com.mstancl.ordermanagertool.data.OrderDetailFields;
-import com.mstancl.ordermanagertool.data.Status;
-import com.mstancl.ordermanagertool.controllers.mainScreen.MainScreenController;
 import com.mstancl.ordermanagertool.util.FXMLoaderManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -58,31 +57,11 @@ public class OrderDetailController {
     public void confirmOrder() {
         MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
 
-        RowConstraints newOrderRow = new RowConstraints();
-        newOrderRow.setVgrow(Priority.NEVER);
-        newOrderRow.setMaxHeight(40);
-
-        mainScreenController.orderGrid_grid.getRowConstraints().add(mainScreenController.orderCounter, newOrderRow);
-
         Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()) + " " + StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
-        Order order = new Order(mainScreenController.orderCounter+1, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
-        OrderDetailFields orderDetailFields = new OrderDetailFields(order);
+        Order order = new Order(mainScreenController.orderCounter + 1, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
 
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getId_label(), 1, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getCustomerName_textField(), 2, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getPhoneNumber_textField(), 3, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getEmailAddress_textField(), 4, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getDateWhenReceived_datePicker(), 5, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getDueDate_datePicker(), 6, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getOrderType_textField(), 7, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getDescription_textArea(), 8, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getSolution_textArea(), 9, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getEstimatedPrice_textField(), 10, mainScreenController.orderCounter);
-        mainScreenController.orderGrid_grid.add(orderDetailFields.getStatus_textField(), 11, mainScreenController.orderCounter);
+        mainScreenController.addOrdersToOrderGrid(order);
 
-        mainScreenController.orderCounter++;
-        mainScreenController.listOfOrders.add(order);
-        mainScreenController.listOfOrderFields.add(orderDetailFields);
         orderDAO.write(order);
 
         mainScreenController.orderDetailsStage.close();

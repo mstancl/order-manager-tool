@@ -25,13 +25,13 @@ No a jak jsme se bavili. Kdyby byo mozny do aplikace kouknout z telefonu na dalk
 
 Pripominky TODO
 
-- Serazovani (podle sloupcu)
+- Serazovani (podle sloupcu)  DONE
 - Vyhledavani (nove okenko?)
 - Print option behem tvorby orderu
 - Smazat delete tlacitko. Delete nebude mozny. Pouze archivace nebo edit
 - Vytvorit moznost statusu archivace
 - Vytvorit filtery. Defaultne neukazovat archivovane zaznamy
-- Napojit to na SQLIte databazi.
+- Napojit to na SQLIte databazi.  DONE
 
 - Potom co se dokonci(archivuje) order, zadat realne vyreseni problemu, atd. Kvuli archivaci
 
