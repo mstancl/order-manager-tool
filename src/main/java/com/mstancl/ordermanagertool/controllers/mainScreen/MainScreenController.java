@@ -80,9 +80,15 @@ public class MainScreenController {
     @FXML
     public void orderGridRowClicked(MouseEvent e) {
         Node source = e.getPickResult().getIntersectedNode();
-        Integer colIndex = GridPane.getColumnIndex(source);
-        Integer rowIndex = GridPane.getRowIndex(source);
+        int colIndex = GridPane.getColumnIndex(source);
+        int rowIndex = GridPane.getRowIndex(source);
         System.out.printf("Mouse entered cell [%d, %d]%n", colIndex, rowIndex);
+        for (Node node : orderGrid_grid.getChildren()) {
+            if (GridPane.getRowIndex(node) == rowIndex && node instanceof Pane && GridPane.getColumnIndex(node) != 0 && GridPane.getColumnIndex(node) != 12) {
+                node.setStyle("-fx-border-color:#ff0000;");
+            }
+        }
+
     }
 
     @FXML
