@@ -5,6 +5,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDetailFields {
 
@@ -29,6 +33,8 @@ public class OrderDetailFields {
     TextField estimatedPrice_textField;
 
     TextField status_textField;
+
+    List<Pane> listOfPaneFields = new ArrayList<>();
 
 
     public OrderDetailFields(Order order) {
@@ -156,5 +162,17 @@ public class OrderDetailFields {
     public void setStatus_textField(TextField status_textField) {
         this.status_textField = status_textField;
         this.status_textField.setEditable(false);
+    }
+
+    public List<Pane> getListOfPaneFields() {
+        return listOfPaneFields;
+    }
+
+    public void setListOfPaneFields(List<Pane> listOfPaneFields) {
+        this.listOfPaneFields = listOfPaneFields;
+    }
+
+    public void addPaneToTheListOfPanes(Pane pane) {
+        this.listOfPaneFields.add(pane);
     }
 }

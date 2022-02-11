@@ -47,6 +47,7 @@ public class MainScreenController {
 
     RowConstraints newOrderRow = new RowConstraints();
 
+
     @FXML
     public void initialize() {
         removeAllRowsFromOrderGrid();
@@ -84,6 +85,8 @@ public class MainScreenController {
         for (Node node : orderGrid_grid.getChildren()) {
             if (GridPane.getRowIndex(node) == rowIndex && node instanceof Pane && GridPane.getColumnIndex(node) != 0 && GridPane.getColumnIndex(node) != 12) {
                 node.setStyle("-fx-border-color:#0000FF;");
+                /*node.getStyleClass().clear();
+                node.setStyle(null);*/
             }
         }
 
@@ -170,7 +173,9 @@ public class MainScreenController {
 
         //to allow the mouse event to register which row/column was clicked
         for (int i = 0; i < 13; i++) {
-            orderGrid_grid.add(new Pane(), i, orderCounter);
+            Pane pane = new Pane();
+            orderGrid_grid.add(pane, i, orderCounter);
+            orderDetailFields.addPaneToTheListOfPanes(pane);
         }
 
         orderCounter++;
@@ -191,7 +196,9 @@ public class MainScreenController {
             orderGrid_grid.getChildren().remove(orderDetailFields.getSolution_textArea());
             orderGrid_grid.getChildren().remove(orderDetailFields.getEstimatedPrice_textField());
             orderGrid_grid.getChildren().remove(orderDetailFields.getStatus_textField());
+            orderGrid_grid.getChildren().removeAll(orderDetailFields.getListOfPaneFields());
         }
+
         listOfOrderFields = new ArrayList<>();
         listOfOrders = new ArrayList<>();
         orderCounter = 0;
