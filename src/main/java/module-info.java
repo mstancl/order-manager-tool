@@ -8,6 +8,7 @@ module com.mstancl.ordermanagertool {
 
 
     exports com.mstancl.ordermanagertool;
+    requires itextpdf;
 
 
     exports com.mstancl.ordermanagertool.data.pojo;
