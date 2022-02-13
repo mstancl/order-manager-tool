@@ -16,7 +16,7 @@ public class OrderDAO implements IDAO<Order> {
 
     @Override
     public void update(Order order) {
-
+        databaseManager.update("test.db", order);
     }
 
     @Override

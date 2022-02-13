@@ -26,9 +26,9 @@ public class DatabaseManager {
         databaseManager.createNewTable("test.db", "Orders", "ID INT PRIMARY KEY     NOT NULL", "CUSTOMER_NAME           TEXT    NOT NULL", "CUSTOMER_PHONE           TEXT    NOT NULL", "CUSTOMER_EMAIL           TEXT    NOT NULL", "DATE_WHEN_RECEIVED            INT     NOT NULL", "DATE_WHEN_DUE            INT     NOT NULL", "ORDER_TYPE           TEXT    NOT NULL", "DESCRIPTION           TEXT    NOT NULL", "SOLUTION           TEXT    NOT NULL", "ESTIMATED_PRICE           INT    NOT NULL", "STATUS           TEXT    NOT NULL");
     }*/
 
-    private Connection connect(String databaseName) {
+    private Connection connect(String databaseName) throws SQLException {
         String url = "jdbc:sqlite:" + databaseName;
-        if (getConnection() == null) {
+        if (getConnection() == null || getConnection().isClosed()) {
             try {
                 conn = DriverManager.getConnection(url);
             } catch (SQLException e) {
@@ -80,10 +80,35 @@ public class DatabaseManager {
             pstmt.setLong(10, order.getEstimatedPrice());
             pstmt.setString(11, order.getStatus().getName());
             pstmt.executeUpdate();
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    public void update(String databaseName, Order order) {
+        String sql = "update Orders set CUSTOMER_NAME = '" + order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname() + "', "
+                + "CUSTOMER_PHONE ='" + order.getCustomer().getPhoneNumber() + "',"
+                + "CUSTOMER_EMAIL ='" + order.getCustomer().getEmail() + "',"
+                + "DATE_WHEN_RECEIVED ='" + order.getDateWhenReceived().format(formatter) + "',"
+                + "DATE_WHEN_DUE ='" + order.getDueDate().format(formatter) + "',"
+                + "ORDER_TYPE ='" + order.getOrderType() + "',"
+                + "DESCRIPTION ='" + order.getDescriptionOfOrder() + "',"
+                + "SOLUTION ='" + order.getSolutionForOrder() + "',"
+                + "ESTIMATED_PRICE ='" + order.getEstimatedPrice() + "',"
+                + "STATUS ='" + order.getStatus().getName() + "' WHERE ID = "+order.getId();
+        System.out.println(sql);
+        try {
+            Connection conn = connect(databaseName);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //
 
     public Order returnRecordByID(String databaseName, String tableName, long id) {
         String sql = "SELECT * FROM " + tableName + " WHERE ID =" + id;

@@ -52,13 +52,15 @@ public class OrderDetailController {
     @FXML
     public TextArea solution_textArea;
 
+    private long orderID = -1;
+
 
     @FXML
     public void confirmOrder() {
         MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
 
         Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
-        Order order = new Order(mainScreenController.orderCounter + 1, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
+        Order order = new Order(orderID == -1 ? mainScreenController.orderCounter + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
 
         mainScreenController.addOrdersToOrderGrid(order);
 
@@ -66,6 +68,8 @@ public class OrderDetailController {
             orderDAO.write(order);
         } else {
             orderDAO.update(order);
+            mainScreenController.removeAllRowsFromOrderGrid();
+            mainScreenController.addOrdersToOrderGrid(orderDAO.getAllRecords());
         }
 
         mainScreenController.orderDetailsStage.close();
@@ -158,5 +162,13 @@ public class OrderDetailController {
 
     public void setSolution_textArea(TextArea solution_textArea) {
         this.solution_textArea = solution_textArea;
+    }
+
+    public long getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(long orderID) {
+        this.orderID = orderID;
     }
 }

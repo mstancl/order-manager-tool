@@ -184,7 +184,7 @@ public class MainScreenController {
         listOfOrderFields.add(orderLineDetailFields);
     }
 
-    private void removeAllRowsFromOrderGrid() {
+    public void removeAllRowsFromOrderGrid() {
         for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
             orderGrid_grid.getChildren().remove(orderLineDetailFields.getId_label());
             orderGrid_grid.getChildren().remove(orderLineDetailFields.getCustomerName_textField());
@@ -244,6 +244,7 @@ public class MainScreenController {
         orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
         orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
         orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
+        orderDetailController.setOrderID(order.getId());
 
 
     }
