@@ -1,15 +1,19 @@
 package com.mstancl.ordermanagertool.controllers.order;
 
+import com.itextpdf.text.DocumentException;
 import com.mstancl.ordermanagertool.controllers.mainScreen.MainScreenController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.AddContentToPDF;
 import com.mstancl.ordermanagertool.util.FXMLoaderManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
 
 
 public class OrderDetailController {
@@ -53,6 +57,9 @@ public class OrderDetailController {
     @FXML
     public ComboBox<String> orderStatus_comboBox;
 
+    @FXML
+    public Button print_button;
+
     private long orderID = -1;
 
 
@@ -67,7 +74,7 @@ public class OrderDetailController {
         MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
 
         Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
-        Order order = new Order(orderID == -1 ? mainScreenController.orderCounter + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()),Status.getStatusByName( orderStatus_comboBox.getValue()));
+        Order order = new Order(orderID == -1 ? mainScreenController.orderCounter + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.getStatusByName(orderStatus_comboBox.getValue()));
 
         mainScreenController.addOrdersToOrderGrid(order);
 
@@ -82,6 +89,18 @@ public class OrderDetailController {
         mainScreenController.orderDetailsStage.close();
 
     }
+
+    @FXML
+    public void printOrderToPDF() throws DocumentException, IOException {
+        MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
+
+        Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
+        Order order = new Order(orderID == -1 ? mainScreenController.orderCounter + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.getStatusByName(orderStatus_comboBox.getValue()));
+
+        AddContentToPDF.writeToPDF("pdfs/originalTemplate.pdf", "pdfs/orderPrint" + order.getId() + order.getCustomer().getFirstName() + order.getCustomer().getSurname()+".pdf", order);
+
+    }
+
 
     public Button getConfirmOrder_button() {
         return confirmOrder_button;

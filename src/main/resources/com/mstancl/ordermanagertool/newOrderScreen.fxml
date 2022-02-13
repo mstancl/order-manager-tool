@@ -197,6 +197,11 @@
                   <Insets left="280.0" />
                </GridPane.margin>
             </Button>
+            <Button fx:id="print_button" mnemonicParsing="false" onAction="#printOrderToPDF" text="PRINT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="570.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </children>
