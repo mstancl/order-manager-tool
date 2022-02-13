@@ -178,4 +178,12 @@ public class OrderDetailController {
     public void setOrderID(long orderID) {
         this.orderID = orderID;
     }
+
+    public ComboBox<String> getOrderStatus_comboBox() {
+        return orderStatus_comboBox;
+    }
+
+    public void setOrderStatus_comboBox(ComboBox<String> orderStatus_comboBox) {
+        this.orderStatus_comboBox = orderStatus_comboBox;
+    }
 }

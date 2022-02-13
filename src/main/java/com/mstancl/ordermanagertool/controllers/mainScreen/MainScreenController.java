@@ -5,6 +5,7 @@ import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.controllers.order.OrderDetailController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
+import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
@@ -244,6 +245,7 @@ public class MainScreenController {
         orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
         orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
         orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
+        orderDetailController.getOrderStatus_comboBox().setValue(order.getStatus().getName());
         orderDetailController.setOrderID(order.getId());
 
 
