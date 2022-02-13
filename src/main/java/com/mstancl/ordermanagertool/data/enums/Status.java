@@ -1,5 +1,12 @@
 package com.mstancl.ordermanagertool.data.enums;
 
+import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Status {
 
     NEW("New"),
@@ -16,6 +23,15 @@ public enum Status {
 
     public String getName() {
         return this.name;
+    }
+
+
+    public static List<String> getAllStatuses() {
+        List<String> statuses = new ArrayList<>();
+        for (Status status : values()) {
+            statuses.add(status.getName());
+        }
+        return statuses;
     }
 
     public static Status getStatusByName(String name) {

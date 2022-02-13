@@ -6,11 +6,9 @@ import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import com.mstancl.ordermanagertool.util.FXMLoaderManager;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -52,15 +50,24 @@ public class OrderDetailController {
     @FXML
     public TextArea solution_textArea;
 
+    @FXML
+    public ComboBox<String> orderStatus_comboBox;
+
     private long orderID = -1;
 
+
+    @FXML
+    public void initialize() {
+        orderStatus_comboBox.setItems(FXCollections.observableArrayList(Status.getAllStatuses()));
+        orderStatus_comboBox.setValue(Status.NEW.getName());
+    }
 
     @FXML
     public void confirmOrder() {
         MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
 
         Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
-        Order order = new Order(orderID == -1 ? mainScreenController.orderCounter + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.IN_PROGRESS);
+        Order order = new Order(orderID == -1 ? mainScreenController.orderCounter + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()),Status.getStatusByName( orderStatus_comboBox.getValue()));
 
         mainScreenController.addOrdersToOrderGrid(order);
 
