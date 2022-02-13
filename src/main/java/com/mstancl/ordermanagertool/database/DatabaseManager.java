@@ -97,7 +97,6 @@ public class DatabaseManager {
                 + "SOLUTION ='" + order.getSolutionForOrder() + "',"
                 + "ESTIMATED_PRICE ='" + order.getEstimatedPrice() + "',"
                 + "STATUS ='" + order.getStatus().getName() + "' WHERE ID = "+order.getId();
-        System.out.println(sql);
         try {
             Connection conn = connect(databaseName);
             PreparedStatement pstmt = conn.prepareStatement(sql);
