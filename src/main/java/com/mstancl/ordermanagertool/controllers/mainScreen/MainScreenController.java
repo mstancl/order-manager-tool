@@ -96,7 +96,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByID() {
-        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
+        List<Order> sortedList = orderDAO.getAllRecords();
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getId))) {
             sortedList.sort(Comparator.comparing(Order::getId).reversed());
@@ -110,7 +110,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByDateWhenReceived() {
-        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
+        List<Order> sortedList = orderDAO.getAllRecords();
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getDateWhenReceived))) {
             sortedList.sort(Comparator.comparing(Order::getDateWhenReceived).reversed());
@@ -124,7 +124,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByDueDate() {
-        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
+        List<Order> sortedList = orderDAO.getAllRecords();
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getDueDate))) {
             sortedList.sort(Comparator.comparing(Order::getDueDate).reversed());
@@ -139,7 +139,7 @@ public class MainScreenController {
 
     @FXML
     public void orderByEstimatedPrice() {
-        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
+        List<Order> sortedList = orderDAO.getAllRecords();
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getEstimatedPrice))) {
             sortedList.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
@@ -182,7 +182,6 @@ public class MainScreenController {
 
         orderCounter++;
         listOfOrderFields.add(orderLineDetailFields);
-        //listOfOrders.add(order);
     }
 
     private void removeAllRowsFromOrderGrid() {
@@ -202,7 +201,6 @@ public class MainScreenController {
         }
 
         listOfOrderFields = new ArrayList<>();
-        // listOfOrders = new ArrayList<>();
         orderCounter = 0;
     }
 
