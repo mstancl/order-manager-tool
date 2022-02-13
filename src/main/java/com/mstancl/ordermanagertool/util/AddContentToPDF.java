@@ -28,31 +28,31 @@ public class AddContentToPDF {
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 576);
-            over.showText("Martin Stancl ");
+            over.showText(order.getCustomer().getFirstName() + " "+order.getCustomer().getSurname());
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 552);
-            over.showText("732166248  mstancl94@gmail.com ");
+            over.showText(order.getCustomer().getPhoneNumber() + " "+ order.getCustomer().getEmail());
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 525);
-            over.showText("13.02.2022");
+            over.showText(order.getDateWhenReceived().toString());
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 500);
-            over.showText("13.02.2022");
+            over.showText(order.getDueDate().toString());
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 475);
-            over.showText("M-4");
+            over.showText(order.getOrderType());
             over.endText();
 
             over.beginText();
@@ -64,19 +64,19 @@ public class AddContentToPDF {
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 425);
-            over.showText("1500");
+            over.showText(Long.toString(order.getEstimatedPrice()));
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 400);
-            over.showText("Broken");
+            over.showText(order.getDescriptionOfOrder());
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 360);
-            over.showText("Fix pls");
+            over.showText(order.getSolutionForOrder());
             over.endText();
 
 
