@@ -183,21 +183,11 @@ public class MainScreenController {
     }
 
     public void removeAllRowsFromOrderGrid() {
-        for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getId_label());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getCustomerName_textField());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getPhoneNumber_textField());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getEmailAddress_textField());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getDateWhenReceived_datePicker());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getDueDate_datePicker());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getOrderType_textField());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getDescription_textArea());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getSolution_textArea());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getEstimatedPrice_textField());
-            orderGrid_grid.getChildren().remove(orderLineDetailFields.getStatus_textField());
-            orderGrid_grid.getChildren().removeAll(orderLineDetailFields.getListOfPaneFields());
-        }
-
+        listOfOrderFields
+                .forEach(
+                        x -> x.getListOfAllNodes().forEach(
+                                node -> orderGrid_grid.getChildren().remove(node))
+                );
         listOfOrderFields = new ArrayList<>();
         orderCounter = 0;
     }
