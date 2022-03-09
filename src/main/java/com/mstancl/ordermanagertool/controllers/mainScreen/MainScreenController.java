@@ -159,25 +159,12 @@ public class MainScreenController {
         orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
         OrderLineDetailFields orderLineDetailFields = new OrderLineDetailFields(order);
 
-        orderGrid_grid.add(orderLineDetailFields.getId_label(), 1, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getCustomerName_textField(), 2, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getPhoneNumber_textField(), 3, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getEmailAddress_textField(), 4, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getDateWhenReceived_datePicker(), 5, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getDueDate_datePicker(), 6, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getOrderType_textField(), 7, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getDescription_textArea(), 8, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getSolution_textArea(), 9, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getEstimatedPrice_textField(), 10, orderCounter);
-        orderGrid_grid.add(orderLineDetailFields.getStatus_textField(), 11, orderCounter);
-
-        //to allow the mouse event to register which row/column was clicked
-        for (int i = 0; i < 13; i++) {
+        for(int i =1;i<=orderLineDetailFields.getListOfAllNodes().size();i++){
+            orderGrid_grid.add(orderLineDetailFields.getListOfAllNodes().get(i-1), i, orderCounter);
             Pane pane = new Pane();
             orderGrid_grid.add(pane, i, orderCounter);
             orderLineDetailFields.addPaneToTheListOfPanes(pane);
         }
-
         orderCounter++;
         listOfOrderFields.add(orderLineDetailFields);
     }
