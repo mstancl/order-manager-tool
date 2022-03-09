@@ -20,12 +20,6 @@ public class DatabaseManager {
         return conn;
     }
 
-    /*public static void main(String[] args) {
-        DatabaseManager databaseManager = new DatabaseManager();
-       // databaseManager.returnAllRecords("test.db", "Orders");
-        databaseManager.createNewTable("test.db", "Orders", "ID INT PRIMARY KEY     NOT NULL", "CUSTOMER_NAME           TEXT    NOT NULL", "CUSTOMER_PHONE           TEXT    NOT NULL", "CUSTOMER_EMAIL           TEXT    NOT NULL", "DATE_WHEN_RECEIVED            INT     NOT NULL", "DATE_WHEN_DUE            INT     NOT NULL", "ORDER_TYPE           TEXT    NOT NULL", "DESCRIPTION           TEXT    NOT NULL", "SOLUTION           TEXT    NOT NULL", "ESTIMATED_PRICE           INT    NOT NULL", "STATUS           TEXT    NOT NULL");
-    }*/
-
     private Connection connect(String databaseName) throws SQLException {
         String url = "jdbc:sqlite:" + databaseName;
         if (getConnection() == null || getConnection().isClosed()) {

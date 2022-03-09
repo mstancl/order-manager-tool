@@ -45,14 +45,11 @@ public class MainScreenController {
 
     public int orderCounter;
 
-    //public List<Order> listOfOrders = new ArrayList<>();
     public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
 
     private final OrderDAO orderDAO = new OrderDAO();
 
     RowConstraints newOrderRow = new RowConstraints();
-
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 
     @FXML
@@ -63,7 +60,6 @@ public class MainScreenController {
         newOrderRow.setMaxHeight(40);
 
         addOrdersToOrderGrid(orderDAO.getAllRecords());
-
     }
 
     @FXML
@@ -71,33 +67,34 @@ public class MainScreenController {
         showOrderDetailsScreen();
     }
 
-
     @FXML
-    public void editOrder() throws IOException {
-        for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
-            if (orderLineDetailFields.getHighlightColor() == HighlightColor.BLUE) {
-                showOrderDetailsScreen(orderLineDetailFields.getOrder());
-            }
-        }
+    public void editOrder() {
+        listOfOrderFields.stream()
+                .filter(OrderLineDetailFields::isToBeEdited)
+                .forEach(x -> showOrderDetailsScreen(x.getOrder()));
     }
 
     @FXML
     public void orderGridRowClicked(MouseEvent e) {
-        Node source = e.getPickResult().getIntersectedNode();
-        Integer rowIndex = GridPane.getRowIndex(source);
-        if (rowIndex != null) {
-            for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
-                if (orderLineDetailFields.getHighlightColor() == HighlightColor.BLUE) {
-                    orderLineDetailFields.setHighlightColor(null);
-                }
-            }
-            listOfOrderFields.get(rowIndex).setHighlightColor(listOfOrderFields.get(rowIndex).getHighlightColor() == null ? HighlightColor.BLUE : null);
+        Node clickedElement = e.getPickResult().getIntersectedNode();
+        Integer rowIndexOfClickedElement = GridPane.getRowIndex(clickedElement);
+        if (rowIndexOfClickedElement != null) {
+            listOfOrderFields
+                    .forEach(order -> {
+                        order.setToBeEdited(false);
+                        order.setHighlightColor(null);
+                    });
+            listOfOrderFields.get(rowIndexOfClickedElement).setToBeEdited(true);
+            listOfOrderFields.get(rowIndexOfClickedElement).setHighlightColor(listOfOrderFields.get(rowIndexOfClickedElement).getHighlightColor() == null ? HighlightColor.BLUE : null);
         }
     }
 
     @FXML
     public void orderByID() {
-        List<Order> sortedList = listOfOrderFields.stream().map(OrderLineDetailFields::getOrder).collect(Collectors.toList());
+        List<Order> sortedList = listOfOrderFields
+                .stream()
+                .map(OrderLineDetailFields::getOrder)
+                .collect(Collectors.toList());
 
         if (Comparators.isInOrder(sortedList, Comparator.comparing(Order::getId))) {
             sortedList.sort(Comparator.comparing(Order::getId).reversed());
@@ -224,30 +221,33 @@ public class MainScreenController {
         orderDetailsStage.show();
     }
 
-    private void showOrderDetailsScreen(Order order) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
-        Parent root = fxmlLoader.load();
-        orderDetailsStage = new Stage();
-        orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
-        orderDetailsStage.setTitle("Order details");
-        orderDetailsStage.setScene(new Scene(root));
-        orderDetailsStage.show();
+    private void showOrderDetailsScreen(Order order) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
+            Parent root = fxmlLoader.load();
+            orderDetailsStage = new Stage();
+            orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
+            orderDetailsStage.setTitle("Order details");
+            orderDetailsStage.setScene(new Scene(root));
+            orderDetailsStage.show();
 
-        OrderDetailController orderDetailController = fxmlLoader.getController();
+            OrderDetailController orderDetailController = fxmlLoader.getController();
 
-        orderDetailController.getFirstName_textField().setText(order.getCustomer().getFirstName());
-        orderDetailController.getSurname_textField().setText(order.getCustomer().getSurname());
-        orderDetailController.getEmailAddress_textField().setText(order.getCustomer().getEmail());
-        orderDetailController.getPhoneNumber_textField().setText(order.getCustomer().getPhoneNumber());
-        orderDetailController.getDateWhenReceived_datePicker().setValue(order.getDateWhenReceived());
-        orderDetailController.getDueDate_datePicker().setValue(order.getDueDate());
-        orderDetailController.getOrderType_textField().setText(order.getOrderType());
-        orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
-        orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
-        orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
-        orderDetailController.getOrderStatus_comboBox().setValue(order.getStatus().getName());
-        orderDetailController.setOrderID(order.getId());
+            orderDetailController.getFirstName_textField().setText(order.getCustomer().getFirstName());
+            orderDetailController.getSurname_textField().setText(order.getCustomer().getSurname());
+            orderDetailController.getEmailAddress_textField().setText(order.getCustomer().getEmail());
+            orderDetailController.getPhoneNumber_textField().setText(order.getCustomer().getPhoneNumber());
+            orderDetailController.getDateWhenReceived_datePicker().setValue(order.getDateWhenReceived());
+            orderDetailController.getDueDate_datePicker().setValue(order.getDueDate());
+            orderDetailController.getOrderType_textField().setText(order.getOrderType());
+            orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
+            orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
+            orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
+            orderDetailController.getOrderStatus_comboBox().setValue(order.getStatus().getName());
+            orderDetailController.setOrderID(order.getId());
 
-
+        } catch (IOException e) {
+            //TODO
+        }
     }
 }

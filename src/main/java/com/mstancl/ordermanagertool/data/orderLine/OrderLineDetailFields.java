@@ -43,6 +43,7 @@ public class OrderLineDetailFields {
 
     private HighlightColor highlightColor;
 
+    private boolean toBeEdited;
 
     public OrderLineDetailFields(Order order) {
         this.order = order;
@@ -57,6 +58,7 @@ public class OrderLineDetailFields {
         setSolution_textArea(new TextField(order.getSolutionForOrder()));
         setEstimatedPrice_textField(new TextField(String.valueOf(order.getEstimatedPrice())));
         setStatus_textField(new TextField(order.getStatus().getName()));
+        setToBeEdited(false);
     }
 
     public HighlightColor getHighlightColor() {
@@ -71,7 +73,6 @@ public class OrderLineDetailFields {
             }
         } else {
             for (Node node : listOfAllNodes) {
-                //node.getStyleClass().clear();
                 node.setStyle(null);
             }
         }
@@ -218,5 +219,14 @@ public class OrderLineDetailFields {
 
     public List<Node> getListOfAllNodes() {
         return listOfAllNodes;
+    }
+
+
+    public boolean isToBeEdited() {
+        return toBeEdited;
+    }
+
+    public void setToBeEdited(boolean toBeEdited) {
+        this.toBeEdited = toBeEdited;
     }
 }
