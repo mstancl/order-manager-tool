@@ -71,12 +71,13 @@ public class MainScreenController {
     public void editOrder() {
         listOfOrderFields.stream()
                 .filter(OrderLineDetailFields::isToBeEdited)
-                .forEach(x -> showOrderDetailsScreen(x.getOrder()));
+                .findFirst()
+                .ifPresent(x -> showOrderDetailsScreen(x.getOrder()));
     }
 
     @FXML
-    public void orderGridRowClicked(MouseEvent e) {
-        Node clickedElement = e.getPickResult().getIntersectedNode();
+    public void orderGridRowClicked(MouseEvent mouseEvent) {
+        Node clickedElement = mouseEvent.getPickResult().getIntersectedNode();
         Integer rowIndexOfClickedElement = GridPane.getRowIndex(clickedElement);
         if (rowIndexOfClickedElement != null) {
             listOfOrderFields
@@ -159,8 +160,8 @@ public class MainScreenController {
         orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
         OrderLineDetailFields orderLineDetailFields = new OrderLineDetailFields(order);
 
-        for(int i =1;i<=orderLineDetailFields.getListOfAllNodes().size();i++){
-            orderGrid_grid.add(orderLineDetailFields.getListOfAllNodes().get(i-1), i, orderCounter);
+        for (int i = 1; i <= orderLineDetailFields.getListOfAllNodes().size(); i++) {
+            orderGrid_grid.add(orderLineDetailFields.getListOfAllNodes().get(i - 1), i, orderCounter);
             Pane pane = new Pane();
             orderGrid_grid.add(pane, i, orderCounter);
             orderLineDetailFields.addPaneToTheListOfPanes(pane);
