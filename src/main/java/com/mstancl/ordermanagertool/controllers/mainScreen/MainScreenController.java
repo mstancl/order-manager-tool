@@ -1,6 +1,5 @@
 package com.mstancl.ordermanagertool.controllers.mainScreen;
 
-import com.google.common.collect.Comparators;
 import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.controllers.order.OrderDetailController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
@@ -42,7 +41,6 @@ public class MainScreenController {
 
     public Stage orderDetailsStage;
 
-    public int orderCounter;
 
     public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
 
@@ -130,16 +128,15 @@ public class MainScreenController {
     }
 
     public void addOrdersToOrderGrid(Order order) {
-        orderGrid_grid.getRowConstraints().add(orderCounter, newOrderRow);
+        orderGrid_grid.getRowConstraints().add(listOfOrderFields.size(), newOrderRow);
         OrderLineDetailFields orderLineDetailFields = new OrderLineDetailFields(order);
 
         for (int i = 1; i <= orderLineDetailFields.getListOfAllNodes().size(); i++) {
-            orderGrid_grid.add(orderLineDetailFields.getListOfAllNodes().get(i - 1), i, orderCounter);
+            orderGrid_grid.add(orderLineDetailFields.getListOfAllNodes().get(i - 1), i, listOfOrderFields.size());
             Pane pane = new Pane();
-            orderGrid_grid.add(pane, i, orderCounter);
+            orderGrid_grid.add(pane, i, listOfOrderFields.size());
             orderLineDetailFields.addPaneToTheListOfPanes(pane);
         }
-        orderCounter++;
         listOfOrderFields.add(orderLineDetailFields);
     }
 
@@ -150,7 +147,6 @@ public class MainScreenController {
                                 node -> orderGrid_grid.getChildren().remove(node))
                 );
         listOfOrderFields = new ArrayList<>();
-        orderCounter = 0;
     }
 
     private List<Order> getListOfAllOrder() {

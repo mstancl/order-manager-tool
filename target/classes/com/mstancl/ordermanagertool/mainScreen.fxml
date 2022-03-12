@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.311" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mstancl.ordermanagertool.controllers.mainScreen.MainScreenController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mstancl.ordermanagertool.controllers.mainScreen.MainScreenController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -98,12 +98,12 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="dateWhenReceived_label" onMouseClicked="#orderByDateWhenReceived" text="Date when received" GridPane.columnIndex="5">
+                  <Label fx:id="dateWhenReceived_label" onMouseClicked="#sortByDateWhenReceived" text="Date when received" GridPane.columnIndex="5">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="dueDate_label" onMouseClicked="#orderByDueDate" text="Due date" GridPane.columnIndex="6">
+                  <Label fx:id="dueDate_label" onMouseClicked="#sortByDueDate" text="Due date" GridPane.columnIndex="6">
                      <padding>
                         <Insets left="40.0" />
                      </padding>
@@ -129,7 +129,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="estimatedPrice_label" onMouseClicked="#orderByEstimatedPrice" text="Estimated price" GridPane.columnIndex="10">
+                  <Label fx:id="estimatedPrice_label" onMouseClicked="#sortByEstimatedPrice" text="Estimated price" GridPane.columnIndex="10">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -145,7 +145,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="id_label" onMouseClicked="#orderByID" text="      ID            " GridPane.columnIndex="1" />
+                  <Label fx:id="id_label" onMouseClicked="#sortByID" text="      ID            " GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <ScrollPane fx:id="orderGrid" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
