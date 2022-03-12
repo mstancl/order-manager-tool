@@ -29,7 +29,7 @@ Pripominky TODO
 - Vyhledavani (nove okenko?)
 - Print option behem tvorby orderu
 - Smazat delete tlacitko. Delete nebude mozny. Pouze archivace nebo edit  DONE
-- Vytvorit moznost statusu archivace
+- Vytvorit moznost statusu archivace  DONE
 - Vytvorit filtery. Defaultne neukazovat archivovane zaznamy
 - Napojit to na SQLIte databazi.  DONE
 
