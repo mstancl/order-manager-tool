@@ -21,7 +21,7 @@ public class OrderDAO implements DAO<Order> {
 
     @Override
     public void print(Order order) {
-
+        System.out.println(order.toString());
     }
 
     @Override
