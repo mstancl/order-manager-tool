@@ -1,6 +1,6 @@
 package com.mstancl.ordermanagertool;
 
-import com.mstancl.ordermanagertool.util.FXMLoaderManager;
+import com.mstancl.ordermanagertool.util.fxml.FXMLoaderManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

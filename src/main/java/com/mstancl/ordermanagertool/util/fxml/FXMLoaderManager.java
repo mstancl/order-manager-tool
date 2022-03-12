@@ -1,4 +1,4 @@
-package com.mstancl.ordermanagertool.util;
+package com.mstancl.ordermanagertool.util.fxml;
 
 import javafx.fxml.FXMLLoader;
 

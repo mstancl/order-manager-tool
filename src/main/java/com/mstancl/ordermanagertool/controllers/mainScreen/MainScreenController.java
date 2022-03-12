@@ -5,7 +5,6 @@ import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.controllers.order.OrderDetailController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
-import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import javafx.fxml.FXML;
@@ -23,11 +22,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainScreenController {
 
@@ -87,6 +86,25 @@ public class MainScreenController {
             listOfOrderFields.get(rowIndexOfClickedElement).setToBeEdited(true);
             listOfOrderFields.get(rowIndexOfClickedElement).setHighlightColor(listOfOrderFields.get(rowIndexOfClickedElement).getHighlightColor() == null ? HighlightColor.BLUE : null);
         }
+    }
+
+    public Stream<Order> orderOrdersBy() {
+        List<Order> listOfOrders = listOfOrderFields
+                .stream()
+                .map(OrderLineDetailFields::getOrder)
+                .collect(Collectors.toList());
+
+        if (Comparators.isInOrder(listOfOrders, Comparator.comparing(Order::getEstimatedPrice))) {
+            listOfOrders.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
+        } else {
+            listOfOrders.sort(Comparator.comparing(Order::getEstimatedPrice));
+        }
+
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(listOfOrders);
+        
+
+        return null;
     }
 
     @FXML
@@ -236,4 +254,6 @@ public class MainScreenController {
             //TODO
         }
     }
+
+
 }
