@@ -36,21 +36,21 @@ public class DatabaseManager {
         String url = "jdbc:sqlite:" + databaseName;
 
         // SQL statement for creating a new table
-        String sqlQuery = "CREATE TABLE " + tableName;
+        StringBuilder sqlQuery = new StringBuilder("CREATE TABLE " + tableName);
         if (columns.length > 0) {
-            sqlQuery += "(";
+            sqlQuery.append("(");
             for (int i = 0; i < columns.length; i++) {
                 if (i != columns.length - 1)
-                    sqlQuery += columns[i] + ",";
+                    sqlQuery.append(columns[i]).append(",");
                 else
-                    sqlQuery += columns[i];
+                    sqlQuery.append(columns[i]);
             }
-            sqlQuery += ")";
+            sqlQuery.append(")");
         }
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
-            stmt.execute(sqlQuery);
+            stmt.execute(sqlQuery.toString());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

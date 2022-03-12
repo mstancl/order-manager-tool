@@ -5,7 +5,7 @@ import com.mstancl.ordermanagertool.database.DatabaseManager;
 
 import java.util.List;
 
-public class OrderDAO implements IDAO<Order> {
+public class OrderDAO implements DAO<Order> {
 
     DatabaseManager databaseManager = new DatabaseManager();
 
