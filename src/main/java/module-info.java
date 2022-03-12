@@ -9,7 +9,6 @@ module com.mstancl.ordermanagertool {
 
     exports com.mstancl.ordermanagertool;
     requires itextpdf;
-    requires lombok;
 
 
     exports com.mstancl.ordermanagertool.data.pojo;
