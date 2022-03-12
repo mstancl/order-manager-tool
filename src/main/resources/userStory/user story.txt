@@ -39,3 +39,5 @@ Pripominky TODO
 
 - Potom co se dokonci(archivuje) order, zadat realne vyreseni problemu, atd. Kvuli archivaci
 
+-TODO Popis zavady limit of characters  120 chars
+- TODO Solution limit of characters
