@@ -1,7 +1,6 @@
 package com.mstancl.ordermanagertool.data.enums;
 
 
-
 import java.util.ArrayList;
 import java.util.List;
 

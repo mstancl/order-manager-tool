@@ -90,7 +90,7 @@ public class DatabaseManager {
                 + "DESCRIPTION ='" + order.getDescriptionOfOrder() + "',"
                 + "SOLUTION ='" + order.getSolutionForOrder() + "',"
                 + "ESTIMATED_PRICE ='" + order.getEstimatedPrice() + "',"
-                + "STATUS ='" + order.getStatus().getName() + "' WHERE ID = "+order.getId();
+                + "STATUS ='" + order.getStatus().getName() + "' WHERE ID = " + order.getId();
         try {
             Connection conn = connect(databaseName);
             PreparedStatement pstmt = conn.prepareStatement(sql);

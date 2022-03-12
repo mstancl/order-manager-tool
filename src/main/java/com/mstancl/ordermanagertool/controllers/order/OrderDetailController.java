@@ -99,7 +99,7 @@ public class OrderDetailController {
         Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
         Order order = new Order(orderID == -1 ? mainScreenController.listOfOrderFields.size() + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.getStatusByName(orderStatus_comboBox.getValue()));
 
-        AddContentToPDF.writeToPDF("pdfs/originalTemplate.pdf", "pdfs/orderPrint" + order.getId() + order.getCustomer().getFirstName() + order.getCustomer().getSurname()+".pdf", order);
+        AddContentToPDF.writeToPDF("pdfs/originalTemplate.pdf", "pdfs/orderPrint" + order.getId() + order.getCustomer().getFirstName() + order.getCustomer().getSurname() + ".pdf", order);
 
     }
 

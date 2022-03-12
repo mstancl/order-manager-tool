@@ -1,13 +1,19 @@
 package com.mstancl.ordermanagertool.util.export;
-import java.io.*;
+
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class AddContentToPDF {
 
     public static void main(String[] args) throws DocumentException, IOException {
-        writeToPDF("C:\\Users\\mstan\\IdeaProjects\\order-manager-tool\\src\\main\\resources\\userStory\\test.pdf","C:\\Users\\mstan\\IdeaProjects\\order-manager-tool\\src\\main\\resources\\userStory\\testTest.pdf",null);
+        writeToPDF("C:\\Users\\mstan\\IdeaProjects\\order-manager-tool\\src\\main\\resources\\userStory\\test.pdf", "C:\\Users\\mstan\\IdeaProjects\\order-manager-tool\\src\\main\\resources\\userStory\\testTest.pdf", null);
     }
 
     public static void writeToPDF(String pathToOriginalTemplate, String nameOfNewFile, Order order) throws IOException, DocumentException {
@@ -28,13 +34,13 @@ public class AddContentToPDF {
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 576);
-            over.showText(order.getCustomer().getFirstName() + " "+order.getCustomer().getSurname());
+            over.showText(order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname());
             over.endText();
 
             over.beginText();
             over.setFontAndSize(bf, 10);
             over.setTextMatrix(175, 552);
-            over.showText(order.getCustomer().getPhoneNumber() + " "+ order.getCustomer().getEmail());
+            over.showText(order.getCustomer().getPhoneNumber() + " " + order.getCustomer().getEmail());
             over.endText();
 
             over.beginText();
@@ -90,9 +96,9 @@ public class AddContentToPDF {
         stamper.close();
     }
 
-  /*  public static void main(String[] args) throws IOException, DocumentException {
+    /*  public static void main(String[] args) throws IOException, DocumentException {
 
-        *//* example inspired from "iText in action" (2006), chapter 2 *//*
+     *//* example inspired from "iText in action" (2006), chapter 2 *//*
 
         PdfReader reader = new PdfReader("C:\\Users\\mstan\\IdeaProjects\\order-manager-tool\\src\\main\\resources\\userStory\\test.pdf"); // input PDF
         PdfStamper stamper = new PdfStamper(reader,

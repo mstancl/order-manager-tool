@@ -23,9 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MainScreenController {
 
@@ -148,15 +146,6 @@ public class MainScreenController {
                 );
         listOfOrderFields = new ArrayList<>();
     }
-
-    private List<Order> getListOfAllOrder() {
-        List<Order> listOfOrders = new ArrayList<>();
-        for (OrderLineDetailFields orderLineDetailFields : listOfOrderFields) {
-            listOfOrders.add(orderLineDetailFields.getOrder());
-        }
-        return listOfOrders;
-    }
-
 
     private void showOrderDetailsScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));

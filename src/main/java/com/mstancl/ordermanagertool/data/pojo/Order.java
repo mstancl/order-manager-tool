@@ -1,9 +1,9 @@
 package com.mstancl.ordermanagertool.data.pojo;
+
 import com.mstancl.ordermanagertool.data.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
 
 import java.time.LocalDate;
 
