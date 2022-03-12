@@ -33,5 +33,9 @@ Pripominky TODO
 - Vytvorit filtery. Defaultne neukazovat archivovane zaznamy
 - Napojit to na SQLIte databazi.  DONE
 
+- Vygenerovat i email s PDF?
+- Casova priorita - Barevne odlisit podle toho jak moc to hori
+- SMS
+
 - Potom co se dokonci(archivuje) order, zadat realne vyreseni problemu, atd. Kvuli archivaci
 

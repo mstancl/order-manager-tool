@@ -6,7 +6,7 @@ import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
-import com.mstancl.ordermanagertool.util.filter.OrderFilter;
+import com.mstancl.ordermanagertool.util.sort.OrderSorter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,8 +22,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class MainScreenController {
 
@@ -46,7 +48,7 @@ public class MainScreenController {
 
     RowConstraints newOrderRow = new RowConstraints();
 
-    private final OrderFilter orderFilter = new OrderFilter();
+    private final OrderSorter orderSorter = new OrderSorter();
 
 
     @FXML
@@ -88,7 +90,8 @@ public class MainScreenController {
 
     @FXML
     public void sortByID() {
-        List<Order> sortedList = orderFilter.sortByID(listOfOrderFields);
+        Function<Order, Long> getId = Order::getId;
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getId);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -96,7 +99,8 @@ public class MainScreenController {
 
     @FXML
     public void sortByDateWhenReceived() {
-        List<Order> sortedList = orderFilter.sortByDateWhenReceived(listOfOrderFields);
+        Function<Order, LocalDate> getDateWhenReceived = Order::getDateWhenReceived;
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getDateWhenReceived);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -104,7 +108,8 @@ public class MainScreenController {
 
     @FXML
     public void sortByDueDate() {
-        List<Order> sortedList = orderFilter.sortByDueDate(listOfOrderFields);
+        Function<Order, LocalDate> getDueDate = Order::getDueDate;
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getDueDate);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -113,7 +118,8 @@ public class MainScreenController {
 
     @FXML
     public void sortByEstimatedPrice() {
-        List<Order> sortedList = orderFilter.sortByEstimatedPrice(listOfOrderFields);
+        Function<Order, Integer> getEstimatedPrice = Order::getEstimatedPrice;
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getEstimatedPrice);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
