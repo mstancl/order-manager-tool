@@ -7,6 +7,7 @@ import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.filter.OrderFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MainScreenController {
 
@@ -49,6 +49,8 @@ public class MainScreenController {
     private final OrderDAO orderDAO = new OrderDAO();
 
     RowConstraints newOrderRow = new RowConstraints();
+
+    private final OrderFilter orderFilter = new OrderFilter();
 
 
     @FXML
@@ -88,92 +90,37 @@ public class MainScreenController {
         }
     }
 
-    public Stream<Order> orderOrdersBy() {
-        List<Order> listOfOrders = listOfOrderFields
-                .stream()
-                .map(OrderLineDetailFields::getOrder)
-                .collect(Collectors.toList());
-
-        if (Comparators.isInOrder(listOfOrders, Comparator.comparing(Order::getEstimatedPrice))) {
-            listOfOrders.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
-        } else {
-            listOfOrders.sort(Comparator.comparing(Order::getEstimatedPrice));
-        }
+    @FXML
+    public void sortByID() {
+        List<Order> sortedList = orderFilter.sortByID(listOfOrderFields);
 
         removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(listOfOrders);
-        
-
-        return null;
+        addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
-    public void orderByID() {
-        List<Order> listOfOrders = listOfOrderFields
-                .stream()
-                .map(OrderLineDetailFields::getOrder)
-                .collect(Collectors.toList());
-
-        if (Comparators.isInOrder(listOfOrders, Comparator.comparing(Order::getId))) {
-            listOfOrders.sort(Comparator.comparing(Order::getId).reversed());
-        } else {
-            listOfOrders.sort(Comparator.comparing(Order::getId));
-        }
+    public void sortByDateWhenReceived() {
+        List<Order> sortedList = orderFilter.sortByDateWhenReceived(listOfOrderFields);
 
         removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(listOfOrders);
+        addOrdersToOrderGrid(sortedList);
     }
 
     @FXML
-    public void orderByDateWhenReceived() {
-        List<Order> listOfOrders = listOfOrderFields
-                .stream()
-                .map(OrderLineDetailFields::getOrder)
-                .collect(Collectors.toList());
-
-        if (Comparators.isInOrder(listOfOrders, Comparator.comparing(Order::getDateWhenReceived))) {
-            listOfOrders.sort(Comparator.comparing(Order::getDateWhenReceived).reversed());
-        } else {
-            listOfOrders.sort(Comparator.comparing(Order::getDateWhenReceived));
-        }
+    public void sortByDueDate() {
+        List<Order> sortedList = orderFilter.sortByDueDate(listOfOrderFields);
 
         removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(listOfOrders);
-    }
-
-    @FXML
-    public void orderByDueDate() {
-        List<Order> listOfOrders = listOfOrderFields
-                .stream()
-                .map(OrderLineDetailFields::getOrder)
-                .collect(Collectors.toList());
-
-        if (Comparators.isInOrder(listOfOrders, Comparator.comparing(Order::getDueDate))) {
-            listOfOrders.sort(Comparator.comparing(Order::getDueDate).reversed());
-        } else {
-            listOfOrders.sort(Comparator.comparing(Order::getDueDate));
-        }
-
-        removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(listOfOrders);
+        addOrdersToOrderGrid(sortedList);
     }
 
 
     @FXML
-    public void orderByEstimatedPrice() {
-        List<Order> listOfOrders = listOfOrderFields
-                .stream()
-                .map(OrderLineDetailFields::getOrder)
-                .collect(Collectors.toList());
-
-        if (Comparators.isInOrder(listOfOrders, Comparator.comparing(Order::getEstimatedPrice))) {
-            listOfOrders.sort(Comparator.comparing(Order::getEstimatedPrice).reversed());
-        } else {
-            listOfOrders.sort(Comparator.comparing(Order::getEstimatedPrice));
-        }
+    public void sortByEstimatedPrice() {
+        List<Order> sortedList = orderFilter.sortByEstimatedPrice(listOfOrderFields);
 
         removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(listOfOrders);
+        addOrdersToOrderGrid(sortedList);
     }
 
     public void addOrdersToOrderGrid(List<Order> listOfOrders) {
