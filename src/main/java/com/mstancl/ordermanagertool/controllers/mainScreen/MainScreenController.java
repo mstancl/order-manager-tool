@@ -67,10 +67,17 @@ public class MainScreenController {
 
     @FXML
     public void editOrder() {
-        listOfOrderFields.stream()
-                .filter(OrderLineDetailFields::isToBeEdited)
-                .findFirst()
-                .ifPresent(x -> showOrderDetailsScreen(x.getOrder()));
+
+            listOfOrderFields.stream()
+                    .filter(OrderLineDetailFields::isToBeEdited)
+                    .findFirst()
+                    .ifPresent(x -> {
+                        try {
+                            showOrderDetailsScreen(x.getOrder());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
     }
 
     @FXML
@@ -91,7 +98,7 @@ public class MainScreenController {
     @FXML
     public void sortByID() {
         Function<Order, Long> getId = Order::getId;
-        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getId);
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields, getId);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -100,7 +107,7 @@ public class MainScreenController {
     @FXML
     public void sortByDateWhenReceived() {
         Function<Order, LocalDate> getDateWhenReceived = Order::getDateWhenReceived;
-        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getDateWhenReceived);
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields, getDateWhenReceived);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -109,7 +116,7 @@ public class MainScreenController {
     @FXML
     public void sortByDueDate() {
         Function<Order, LocalDate> getDueDate = Order::getDueDate;
-        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getDueDate);
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields, getDueDate);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -119,7 +126,7 @@ public class MainScreenController {
     @FXML
     public void sortByEstimatedPrice() {
         Function<Order, Integer> getEstimatedPrice = Order::getEstimatedPrice;
-        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields,getEstimatedPrice);
+        List<Order> sortedList = orderSorter.getListOfOrdersSortedBy(listOfOrderFields, getEstimatedPrice);
 
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(sortedList);
@@ -163,34 +170,31 @@ public class MainScreenController {
         orderDetailsStage.show();
     }
 
-    private void showOrderDetailsScreen(Order order) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
-            Parent root = fxmlLoader.load();
-            orderDetailsStage = new Stage();
-            orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
-            orderDetailsStage.setTitle("Order details");
-            orderDetailsStage.setScene(new Scene(root));
-            orderDetailsStage.show();
+    private void showOrderDetailsScreen(Order order) throws IOException {
 
-            OrderDetailController orderDetailController = fxmlLoader.getController();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("newOrderScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        orderDetailsStage = new Stage();
+        orderDetailsStage.initModality(Modality.APPLICATION_MODAL);
+        orderDetailsStage.setTitle("Order details");
+        orderDetailsStage.setScene(new Scene(root));
+        orderDetailsStage.show();
 
-            orderDetailController.getFirstName_textField().setText(order.getCustomer().getFirstName());
-            orderDetailController.getSurname_textField().setText(order.getCustomer().getSurname());
-            orderDetailController.getEmailAddress_textField().setText(order.getCustomer().getEmail());
-            orderDetailController.getPhoneNumber_textField().setText(order.getCustomer().getPhoneNumber());
-            orderDetailController.getDateWhenReceived_datePicker().setValue(order.getDateWhenReceived());
-            orderDetailController.getDueDate_datePicker().setValue(order.getDueDate());
-            orderDetailController.getOrderType_textField().setText(order.getOrderType());
-            orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
-            orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
-            orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
-            orderDetailController.getOrderStatus_comboBox().setValue(order.getStatus().getName());
-            orderDetailController.setOrderID(order.getId());
+        OrderDetailController orderDetailController = fxmlLoader.getController();
 
-        } catch (IOException e) {
-            //TODO
-        }
+        orderDetailController.getFirstName_textField().setText(order.getCustomer().getFirstName());
+        orderDetailController.getSurname_textField().setText(order.getCustomer().getSurname());
+        orderDetailController.getEmailAddress_textField().setText(order.getCustomer().getEmail());
+        orderDetailController.getPhoneNumber_textField().setText(order.getCustomer().getPhoneNumber());
+        orderDetailController.getDateWhenReceived_datePicker().setValue(order.getDateWhenReceived());
+        orderDetailController.getDueDate_datePicker().setValue(order.getDueDate());
+        orderDetailController.getOrderType_textField().setText(order.getOrderType());
+        orderDetailController.getEstimatedPrice_textField().setText(Long.toString(order.getEstimatedPrice()));
+        orderDetailController.getDescription_textArea().setText(order.getDescriptionOfOrder());
+        orderDetailController.getSolution_textArea().setText(order.getSolutionForOrder());
+        orderDetailController.getOrderStatus_comboBox().setValue(order.getStatus().getName());
+        orderDetailController.setOrderID(order.getId());
+
     }
 
 
