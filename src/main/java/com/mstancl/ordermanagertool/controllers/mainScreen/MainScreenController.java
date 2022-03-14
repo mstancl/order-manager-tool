@@ -10,6 +10,7 @@ import com.mstancl.ordermanagertool.data.pojo.Order;
 import com.mstancl.ordermanagertool.util.filter.OrderFilter;
 import com.mstancl.ordermanagertool.util.filter.specification.*;
 import com.mstancl.ordermanagertool.util.sort.OrderSorter;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -55,7 +56,7 @@ public class MainScreenController {
     public TextField customerNumberFilter_textField;
 
     @FXML
-    public ComboBox<Status> statusFilter_comboBox;
+    public ComboBox<String> statusFilter_comboBox;
 
     @FXML
     public DatePicker dateWhenReceivedFilter_datePicker;
@@ -103,7 +104,7 @@ public class MainScreenController {
             }
         });
 
-
+        statusFilter_comboBox.setItems(FXCollections.observableArrayList(Status.getAllStatuses()));
     }
 
     @FXML
@@ -265,7 +266,7 @@ public class MainScreenController {
             listOfFilters.add(new CustomerNameFilterSpecification(customerNumberFilter_textField.getText()));
         }
         if (statusFilter_comboBox.getValue() != null) {
-            listOfFilters.add(new StatusFilterSpecification(statusFilter_comboBox.getValue()));
+            listOfFilters.add(new StatusFilterSpecification(Status.getStatusByName(statusFilter_comboBox.getValue())));
         }
         if (dateWhenReceivedFilter_datePicker.getValue() != null) {
             listOfFilters.add(new DateWhenReceivedFilterSpecification(dateWhenReceivedFilter_datePicker.getValue()));
