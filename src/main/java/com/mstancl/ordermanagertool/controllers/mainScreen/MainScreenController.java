@@ -92,13 +92,13 @@ public class MainScreenController {
         newOrderRow.setMaxHeight(40);
 
         idFilter_textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue != null && !newValue.matches("\\d*")) {
                 idFilter_textField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         estimatedPriceFilter_textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue != null && !newValue.matches("\\d*")) {
                 estimatedPriceFilter_textField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
@@ -245,17 +245,23 @@ public class MainScreenController {
 
     @FXML
     public void clearFilters() {
-        System.out.println("Cleared filters...");
+        idFilter_textField.setText(null);
+        customerNumberFilter_textField.setText(null);
+        statusFilter_comboBox.setValue(null);
+        dateWhenReceivedFilter_datePicker.setValue(null);
+        dateWhenDueFilter_datePicker.setValue(null);
+        estimatedPriceFilter_textField.setText(null);
+        applyFilter();
     }
 
     @FXML
     public void applyFilter() {
         List<Specification<Order>> listOfFilters = new ArrayList<>();
 
-        if (!idFilter_textField.getText().isBlank()) {
+        if (idFilter_textField.getText() != null && !idFilter_textField.getText().isBlank()) {
             listOfFilters.add(new IDFilterSpecification(Long.parseLong(idFilter_textField.getText())));
         }
-        if (!customerNumberFilter_textField.getText().isBlank()) {
+        if (customerNumberFilter_textField.getText() != null && !customerNumberFilter_textField.getText().isBlank()) {
             listOfFilters.add(new CustomerNameFilterSpecification(customerNumberFilter_textField.getText()));
         }
         if (statusFilter_comboBox.getValue() != null) {
@@ -267,10 +273,9 @@ public class MainScreenController {
         if (dateWhenDueFilter_datePicker.getValue() != null) {
             listOfFilters.add(new DateWhenDueFilterSpecification(dateWhenDueFilter_datePicker.getValue()));
         }
-        if (!estimatedPriceFilter_textField.getText().isBlank()) {
+        if (estimatedPriceFilter_textField.getText() != null && !estimatedPriceFilter_textField.getText().isBlank()) {
             listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText())));
         }
-
 
         List<Order> listOfOrdersToFilter = orderDAO.getAllRecords();
 
