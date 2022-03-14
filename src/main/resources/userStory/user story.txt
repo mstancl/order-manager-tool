@@ -41,3 +41,4 @@ Pripominky TODO
 
 -TODO Popis zavady limit of characters  120 chars
 - TODO Solution limit of characters
+- TODO nefunguje filter podle data
