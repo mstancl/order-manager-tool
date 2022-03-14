@@ -30,6 +30,14 @@ public class AddContentToPDF {
                 testOrder);
     }
 
+    public static void writeLineToPDF(PdfContentByte pdf, String text, int x, int y, BaseFont baseFont, int fontSize) {
+        pdf.beginText();
+        pdf.setFontAndSize(baseFont, fontSize);
+        pdf.setTextMatrix(x, y);
+        pdf.showText(text);
+        pdf.endText();
+    }
+
     public static void writeToPDF(String pathToOriginalTemplate, String nameOfNewFile, Order order) throws IOException, DocumentException {
         PdfReader reader = new PdfReader(pathToOriginalTemplate);
         PdfStamper stamper = new PdfStamper(reader,
@@ -42,47 +50,13 @@ public class AddContentToPDF {
         // you can also use getUnderContent for writing in the bottom layer
         PdfContentByte over = stamper.getOverContent(1);
 
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 576);
-        over.showText(order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname());
-        over.endText();
-
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 552);
-        over.showText(order.getCustomer().getPhoneNumber() + " " + order.getCustomer().getEmail());
-        over.endText();
-
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 525);
-        over.showText(order.getDateWhenReceived().toString());
-        over.endText();
-
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 500);
-        over.showText(order.getDueDate().toString());
-        over.endText();
-
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 475);
-        over.showText(order.getOrderType());
-        over.endText();
-
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 450);
-        over.showText("N/A");
-        over.endText();
-
-        over.beginText();
-        over.setFontAndSize(bf, 10);
-        over.setTextMatrix(175, 425);
-        over.showText(Long.toString(order.getEstimatedPrice()));
-        over.endText();
+        writeLineToPDF(over, order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname(), 175, 576, bf, 10);
+        writeLineToPDF(over, order.getCustomer().getPhoneNumber() + " " + order.getCustomer().getEmail(), 175, 552, bf, 10);
+        writeLineToPDF(over, order.getDateWhenReceived().toString(), 175, 525, bf, 10);
+        writeLineToPDF(over, order.getDueDate().toString(), 175, 500, bf, 10);
+        writeLineToPDF(over, order.getOrderType(), 175, 475, bf, 10);
+        writeLineToPDF(over, "N/A", 175, 450, bf, 10);
+        writeLineToPDF(over, Long.toString(order.getEstimatedPrice()), 175, 425, bf, 10);
 
         List<String> listOfDescriptionLines = new ArrayList<>();
         StringBuilder line = new StringBuilder();
@@ -97,14 +71,9 @@ public class AddContentToPDF {
         listOfDescriptionLines.add(line.toString());
 
         int y = 400;
-        for (String lineOfDescription : listOfDescriptionLines){
-            over.beginText();
-            over.setFontAndSize(bf, 10);
-            over.setTextMatrix(175, y);
-            over.showText(lineOfDescription);
-            over.endText();
-
-            y=y-15;
+        for (String lineOfDescription : listOfDescriptionLines) {
+            writeLineToPDF(over,lineOfDescription,175,y,bf,10);
+            y = y - 15;
         }
 
 
@@ -121,13 +90,9 @@ public class AddContentToPDF {
         listOfSolutionLines.add(solutionLine.toString());
 
         int solutionY = 360;
-        for (String lineOfSolution : listOfSolutionLines){
-            over.beginText();
-            over.setFontAndSize(bf, 10);
-            over.setTextMatrix(175, solutionY);
-            over.showText(lineOfSolution);
-            over.endText();
-            solutionY=solutionY-15;
+        for (String lineOfSolution : listOfSolutionLines) {
+            writeLineToPDF(over,lineOfSolution,175,solutionY,bf,10);
+            solutionY = solutionY - 15;
         }
 
            /* // draw a red circle
