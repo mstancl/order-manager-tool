@@ -4,8 +4,11 @@ import com.mstancl.ordermanagertool.Main;
 import com.mstancl.ordermanagertool.controllers.order.OrderDetailController;
 import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.HighlightColor;
+import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.filter.OrderFilter;
+import com.mstancl.ordermanagertool.util.filter.specification.*;
 import com.mstancl.ordermanagertool.util.sort.OrderSorter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -42,6 +48,31 @@ public class MainScreenController {
     public Stage orderDetailsStage;
 
 
+    @FXML
+    public TextField idFilter_textField;
+
+    @FXML
+    public TextField customerNumberFilter_textField;
+
+    @FXML
+    public ComboBox<Status> statusFilter_comboBox;
+
+    @FXML
+    public DatePicker dateWhenReceivedFilter_datePicker;
+
+    @FXML
+    public DatePicker dateWhenDueFilter_datePicker;
+
+    @FXML
+    public TextField estimatedPriceFilter_textField;
+
+    @FXML
+    public Button clearFilters_button;
+
+    @FXML
+    public Button applyFilter_button;
+
+
     public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
 
     private final OrderDAO orderDAO = new OrderDAO();
@@ -49,6 +80,7 @@ public class MainScreenController {
     RowConstraints newOrderRow = new RowConstraints();
 
     private final OrderSorter orderSorter = new OrderSorter();
+    private final OrderFilter orderFilter = new OrderFilter();
 
 
     @FXML
@@ -58,6 +90,20 @@ public class MainScreenController {
 
         newOrderRow.setVgrow(Priority.NEVER);
         newOrderRow.setMaxHeight(40);
+
+        idFilter_textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                idFilter_textField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        estimatedPriceFilter_textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                estimatedPriceFilter_textField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
+
     }
 
     @FXML
@@ -68,16 +114,16 @@ public class MainScreenController {
     @FXML
     public void editOrder() {
 
-            listOfOrderFields.stream()
-                    .filter(OrderLineDetailFields::isToBeEdited)
-                    .findFirst()
-                    .ifPresent(x -> {
-                        try {
-                            showOrderDetailsScreen(x.getOrder());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
+        listOfOrderFields.stream()
+                .filter(OrderLineDetailFields::isToBeEdited)
+                .findFirst()
+                .ifPresent(x -> {
+                    try {
+                        showOrderDetailsScreen(x.getOrder());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     @FXML
@@ -195,6 +241,46 @@ public class MainScreenController {
         orderDetailController.getOrderStatus_comboBox().setValue(order.getStatus().getName());
         orderDetailController.setOrderID(order.getId());
 
+    }
+
+    @FXML
+    public void clearFilters() {
+        System.out.println("Cleared filters...");
+    }
+
+    @FXML
+    public void applyFilter() {
+        List<Specification<Order>> listOfFilters = new ArrayList<>();
+
+        if (!idFilter_textField.getText().isBlank()) {
+            listOfFilters.add(new IDFilterSpecification(Long.parseLong(idFilter_textField.getText())));
+        }
+        if (!customerNumberFilter_textField.getText().isBlank()) {
+            listOfFilters.add(new CustomerNameFilterSpecification(customerNumberFilter_textField.getText()));
+        }
+        if (statusFilter_comboBox.getValue() != null) {
+            listOfFilters.add(new StatusFilterSpecification(statusFilter_comboBox.getValue()));
+        }
+        if (dateWhenReceivedFilter_datePicker.getValue() != null) {
+            listOfFilters.add(new DateWhenReceivedFilterSpecification(dateWhenReceivedFilter_datePicker.getValue()));
+        }
+        if (dateWhenDueFilter_datePicker.getValue() != null) {
+            listOfFilters.add(new DateWhenDueFilterSpecification(dateWhenDueFilter_datePicker.getValue()));
+        }
+        if (!estimatedPriceFilter_textField.getText().isBlank()) {
+            listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText())));
+        }
+
+
+        List<Order> listOfOrdersToFilter = orderDAO.getAllRecords();
+
+        for (Specification<Order> filter : listOfFilters) {
+            listOfOrdersToFilter = orderFilter.getFilteredOrders(listOfOrdersToFilter, filter);
+        }
+
+        removeAllRowsFromOrderGrid();
+        listOfOrdersToFilter
+                .forEach(this::addOrdersToOrderGrid);
     }
 
 

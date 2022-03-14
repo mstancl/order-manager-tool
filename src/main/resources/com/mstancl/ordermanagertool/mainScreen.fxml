@@ -220,12 +220,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" text="Clear filters" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button fx:id="clearFilters_button" mnemonicParsing="false" onAction="#clearFilters" text="Clear filters" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="100.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Submit filter" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Button fx:id="applyFilter_button" mnemonicParsing="false" onAction="#applyFilter" text="Apply filter" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="100.0" />
                            </GridPane.margin>
@@ -239,7 +239,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField maxWidth="75.0" GridPane.columnIndex="1">
+                              <TextField fx:id="idFilter_textField" maxWidth="75.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="130.0" />
                                  </GridPane.margin>
@@ -257,7 +257,7 @@
                            </rowConstraints>
                            <children>
                               <Label text="Customer name" GridPane.columnIndex="1" />
-                              <TextField maxWidth="100.0" GridPane.columnIndex="1">
+                              <TextField fx:id="customerNumberFilter_textField" maxWidth="100.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="130.0" />
                                  </GridPane.margin>
@@ -280,7 +280,7 @@
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </ComboBox>
-                              <DatePicker maxWidth="100.0" GridPane.columnIndex="1">
+                              <DatePicker fx:id="dateWhenDueFilter_datePicker" maxWidth="100.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="60.0" />
                                  </GridPane.margin>
@@ -303,7 +303,7 @@
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </ComboBox>
-                              <DatePicker maxWidth="100.0" GridPane.columnIndex="1">
+                              <DatePicker fx:id="dateWhenReceivedFilter_datePicker" maxWidth="100.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="60.0" />
                                  </GridPane.margin>
@@ -321,7 +321,7 @@
                            </rowConstraints>
                            <children>
                               <Label text="Estimated price" />
-                              <TextField maxWidth="100.0" GridPane.columnIndex="1">
+                              <TextField fx:id="estimatedPriceFilter_textField" maxWidth="100.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="60.0" />
                                  </GridPane.margin>
@@ -343,7 +343,7 @@
                            </rowConstraints>
                            <children>
                               <Label text="Status" GridPane.columnIndex="1" />
-                              <ComboBox prefWidth="100.0" GridPane.columnIndex="1">
+                              <ComboBox fx:id="statusFilter_comboBox" prefWidth="100.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="130.0" />
                                  </GridPane.margin>
