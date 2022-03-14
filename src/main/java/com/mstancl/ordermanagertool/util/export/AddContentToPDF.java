@@ -58,22 +58,22 @@ public class AddContentToPDF {
         PdfReader reader = new PdfReader(pathToOriginalTemplate);
         PdfStamper stamper = new PdfStamper(reader,
                 new FileOutputStream(nameOfNewFile));
-        BaseFont bf = BaseFont.createFont(
-                BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED); // set font
+        BaseFont font = BaseFont.createFont(
+                BaseFont.HELVETICA,
+                BaseFont.CP1252,
+                BaseFont.NOT_EMBEDDED);
 
         PdfContentByte over = stamper.getOverContent(1);
 
-        writeLineToPDF(over, order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname(), 175, 576, bf, 10);
-        writeLineToPDF(over, order.getCustomer().getPhoneNumber() + " " + order.getCustomer().getEmail(), 175, 552, bf, 10);
-        writeLineToPDF(over, order.getDateWhenReceived().toString(), 175, 525, bf, 10);
-        writeLineToPDF(over, order.getDueDate().toString(), 175, 500, bf, 10);
-        writeLineToPDF(over, order.getOrderType(), 175, 475, bf, 10);
-        writeLineToPDF(over, "N/A", 175, 450, bf, 10);
-        writeLineToPDF(over, Long.toString(order.getEstimatedPrice()), 175, 425, bf, 10);
-
-        writeLineToPDF(over, order.getDescriptionOfOrder(), 175, 400, bf, 10);
-        writeLineToPDF(over, order.getSolutionForOrder(), 175, 360, bf, 10);
-
+        writeLineToPDF(over, order.getCustomer().getFirstName() + " " + order.getCustomer().getSurname(), 175, 576, font, 10);
+        writeLineToPDF(over, order.getCustomer().getPhoneNumber() + " " + order.getCustomer().getEmail(), 175, 552, font, 10);
+        writeLineToPDF(over, order.getDateWhenReceived().toString(), 175, 525, font, 10);
+        writeLineToPDF(over, order.getDueDate().toString(), 175, 500, font, 10);
+        writeLineToPDF(over, order.getOrderType(), 175, 475, font, 10);
+        writeLineToPDF(over, "N/A", 175, 450, font, 10);
+        writeLineToPDF(over, Long.toString(order.getEstimatedPrice()), 175, 425, font, 10);
+        writeLineToPDF(over, order.getDescriptionOfOrder(), 175, 400, font, 10);
+        writeLineToPDF(over, order.getSolutionForOrder(), 175, 360, font, 10);
 
         stamper.close();
     }
