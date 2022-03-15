@@ -14,6 +14,6 @@ public class DateWhenReceivedFilterSpecification implements Specification<Order>
 
     @Override
     public boolean isSatisfied(Order item) {
-        return item.getDateWhenReceived() == dateWhenReceived;
+        return item.getDateWhenReceived().equals(dateWhenReceived);
     }
 }

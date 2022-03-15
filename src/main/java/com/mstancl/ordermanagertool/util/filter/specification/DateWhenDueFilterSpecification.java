@@ -14,6 +14,6 @@ public class DateWhenDueFilterSpecification implements Specification<Order> {
 
     @Override
     public boolean isSatisfied(Order item) {
-        return item.getDueDate() == dateWhenDue;
+        return item.getDueDate().equals(dateWhenDue);
     }
 }
