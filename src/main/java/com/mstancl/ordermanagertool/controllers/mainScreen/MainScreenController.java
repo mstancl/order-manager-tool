@@ -285,13 +285,13 @@ public class MainScreenController {
             listOfFilters.add(new StatusFilterSpecification(Status.getStatusByName(statusFilter_comboBox.getValue())));
         }
         if (dateWhenReceivedFilter_datePicker.getValue() != null) {
-            listOfFilters.add(new DateWhenReceivedFilterSpecification(dateWhenReceivedFilter_datePicker.getValue()));
+            listOfFilters.add(new DateWhenReceivedFilterSpecification(dateWhenReceivedFilter_datePicker.getValue(), FilterCriteriaComparator.getEnum(dateWhenReceivedFilterComparator_combobox.getValue())));
         }
         if (dateWhenDueFilter_datePicker.getValue() != null) {
-            listOfFilters.add(new DateWhenDueFilterSpecification(dateWhenDueFilter_datePicker.getValue()));
+            listOfFilters.add(new DateWhenDueFilterSpecification(dateWhenDueFilter_datePicker.getValue(), FilterCriteriaComparator.getEnum(dateWhenDueFilterComparator_combobox.getValue())));
         }
         if (estimatedPriceFilter_textField.getText() != null && !estimatedPriceFilter_textField.getText().isBlank()) {
-            listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText()),FilterCriteriaComparator.getEnum(estimatedPriceFilterComparator_combobox.getValue())));
+            listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText()), FilterCriteriaComparator.getEnum(estimatedPriceFilterComparator_combobox.getValue())));
         }
 
         List<Order> listOfOrdersToFilter = orderDAO.getAllRecords();

@@ -10,17 +10,20 @@ public class DateWhenDueFilterSpecification implements Specification<Order> {
     LocalDate dateWhenDue;
     FilterCriteriaComparator filterCriteriaComparator;
 
-    public DateWhenDueFilterSpecification(LocalDate dateWhenDue) {
-        this.dateWhenDue = dateWhenDue;
-    }
 
-    public DateWhenDueFilterSpecification(LocalDate dateWhenDue,FilterCriteriaComparator filterCriteriaComparator) {
+    public DateWhenDueFilterSpecification(LocalDate dateWhenDue, FilterCriteriaComparator filterCriteriaComparator) {
         this.dateWhenDue = dateWhenDue;
         this.filterCriteriaComparator = filterCriteriaComparator;
     }
 
     @Override
-    public boolean isSatisfied(Order item) {
-        return item.getDueDate().equals(dateWhenDue);
+    public boolean isSatisfied(Order order) {
+        return switch (filterCriteriaComparator) {
+            case EQUALS -> order.getDueDate().compareTo(this.dateWhenDue) == 0;
+            case LESS_THAN -> order.getDueDate().compareTo(this.dateWhenDue) < 0;
+            case GREATER_THAN -> order.getDueDate().compareTo(this.dateWhenDue) > 0;
+            case LESS_OR_EQUAL_TO -> order.getDueDate().compareTo(this.dateWhenDue) <= 0;
+            case GREATER_OR_EQUAL_TO -> order.getDueDate().compareTo(this.dateWhenDue) >= 0;
+        };
     }
 }

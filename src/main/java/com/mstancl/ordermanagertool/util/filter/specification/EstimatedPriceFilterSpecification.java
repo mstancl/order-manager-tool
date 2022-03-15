@@ -24,6 +24,5 @@ public class EstimatedPriceFilterSpecification implements Specification<Order> {
             case LESS_OR_EQUAL_TO -> order.getEstimatedPrice() <= this.estimatedPrice;
             case GREATER_OR_EQUAL_TO -> order.getEstimatedPrice() >= this.estimatedPrice;
         };
-
     }
 }
