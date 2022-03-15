@@ -210,9 +210,9 @@
                         </GridPane>
                   <GridPane GridPane.columnIndex="1">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="338.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="370.0" percentWidth="40.0" prefWidth="401.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="182.0" percentWidth="20.0" prefWidth="189.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -241,7 +241,7 @@
                            <children>
                               <TextField fx:id="idFilter_textField" maxWidth="75.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
-                                    <Insets left="130.0" />
+                                    <Insets left="155.0" />
                                  </GridPane.margin>
                               </TextField>
                               <Label text="ID" GridPane.columnIndex="1" />
@@ -275,19 +275,19 @@
                            </rowConstraints>
                            <children>
                               <Label text="Date when due" />
-                              <ComboBox prefWidth="30.0" GridPane.columnIndex="2">
+                              <ComboBox fx:id="dateWhenDueFilterComparator_combobox" maxWidth="60.0" GridPane.columnIndex="2">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </ComboBox>
-                              <DatePicker fx:id="dateWhenDueFilter_datePicker" maxWidth="100.0" GridPane.columnIndex="1">
+                              <DatePicker fx:id="dateWhenDueFilter_datePicker" minWidth="120.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
-                                    <Insets left="60.0" />
+                                    <Insets left="20.0" />
                                  </GridPane.margin>
                               </DatePicker>
                            </children>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="1">
+                        <GridPane prefHeight="40.0" prefWidth="386.0" GridPane.columnIndex="1">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
@@ -298,14 +298,14 @@
                            </rowConstraints>
                            <children>
                               <Label text="Date when received" />
-                              <ComboBox prefWidth="30.0" GridPane.columnIndex="2">
+                              <ComboBox fx:id="dateWhenReceivedFilterComparator_combobox" maxWidth="60.0" GridPane.columnIndex="2">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </ComboBox>
-                              <DatePicker fx:id="dateWhenReceivedFilter_datePicker" maxWidth="100.0" GridPane.columnIndex="1">
+                              <DatePicker fx:id="dateWhenReceivedFilter_datePicker" GridPane.columnIndex="1">
                                  <GridPane.margin>
-                                    <Insets left="60.0" />
+                                    <Insets left="20.0" />
                                  </GridPane.margin>
                               </DatePicker>
                            </children>
@@ -326,7 +326,7 @@
                                     <Insets left="60.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <ComboBox prefWidth="30.0" GridPane.columnIndex="2">
+                              <ComboBox fx:id="estimatedPriceFilterComparator_combobox" maxWidth="60.0" GridPane.columnIndex="2">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>

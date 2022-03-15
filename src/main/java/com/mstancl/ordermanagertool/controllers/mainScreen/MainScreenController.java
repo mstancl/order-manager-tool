@@ -7,6 +7,7 @@ import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.filter.FilterCriteriaComparator;
 import com.mstancl.ordermanagertool.util.filter.OrderFilter;
 import com.mstancl.ordermanagertool.util.filter.specification.*;
 import com.mstancl.ordermanagertool.util.sort.OrderSorter;
@@ -73,6 +74,15 @@ public class MainScreenController {
     @FXML
     public Button applyFilter_button;
 
+    @FXML
+    public ComboBox<String> dateWhenReceivedFilterComparator_combobox;
+
+    @FXML
+    public ComboBox<String> dateWhenDueFilterComparator_combobox;
+
+    @FXML
+    public ComboBox<String> estimatedPriceFilterComparator_combobox;
+
 
     public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
 
@@ -104,7 +114,13 @@ public class MainScreenController {
             }
         });
 
-        statusFilter_comboBox.setItems(FXCollections.observableArrayList(Status.getAllStatuses()));
+        List.of(dateWhenReceivedFilterComparator_combobox, dateWhenDueFilterComparator_combobox, estimatedPriceFilterComparator_combobox)
+                .forEach(combobox -> {
+                    combobox.setItems(FXCollections.observableArrayList(FilterCriteriaComparator.getAllSigns()));
+                    combobox.setValue(FilterCriteriaComparator.getAllSigns().get(0));
+                });
+
+        statusFilter_comboBox.setItems(FXCollections.observableArrayList(Status.getAllNames()));
     }
 
     @FXML

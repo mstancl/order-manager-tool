@@ -2,6 +2,7 @@ package com.mstancl.ordermanagertool.data.enums;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum Status {
@@ -23,12 +24,11 @@ public enum Status {
     }
 
 
-    public static List<String> getAllStatuses() {
-        List<String> statuses = new ArrayList<>();
-        for (Status status : values()) {
-            statuses.add(status.getName());
-        }
-        return statuses;
+    public static List<String> getAllNames() {
+       return Arrays
+                .stream(values())
+                .map(Status::getName)
+                .toList();
     }
 
     public static Status getStatusByName(String name) {

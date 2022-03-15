@@ -65,7 +65,7 @@ public class OrderDetailController {
 
     @FXML
     public void initialize() {
-        orderStatus_comboBox.setItems(FXCollections.observableArrayList(Status.getAllStatuses()));
+        orderStatus_comboBox.setItems(FXCollections.observableArrayList(Status.getAllNames()));
         orderStatus_comboBox.setValue(Status.NEW.getName());
     }
 
