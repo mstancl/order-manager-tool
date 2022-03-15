@@ -1,5 +1,7 @@
 package com.mstancl.ordermanagertool.util.filter;
 
+import com.mstancl.ordermanagertool.data.enums.Status;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +21,15 @@ public enum FilterCriteriaComparator {
 
     public String getSign() {
         return sign;
+    }
+
+    public static FilterCriteriaComparator getEnum(String sign){
+        for (FilterCriteriaComparator filterCriteriaComparator : values()) {
+            if (filterCriteriaComparator.getSign().equals(sign)) {
+                return filterCriteriaComparator;
+            }
+        }
+        return null;
     }
 
     public static List<String> getAllSigns() {

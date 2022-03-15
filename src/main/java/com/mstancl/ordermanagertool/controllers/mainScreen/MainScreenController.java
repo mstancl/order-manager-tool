@@ -291,7 +291,7 @@ public class MainScreenController {
             listOfFilters.add(new DateWhenDueFilterSpecification(dateWhenDueFilter_datePicker.getValue()));
         }
         if (estimatedPriceFilter_textField.getText() != null && !estimatedPriceFilter_textField.getText().isBlank()) {
-            listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText())));
+            listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText()),FilterCriteriaComparator.getEnum(estimatedPriceFilterComparator_combobox.getValue())));
         }
 
         List<Order> listOfOrdersToFilter = orderDAO.getAllRecords();
