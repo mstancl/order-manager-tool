@@ -26,18 +26,18 @@ No a jak jsme se bavili. Kdyby byo mozny do aplikace kouknout z telefonu na dalk
 Pripominky TODO
 
 - Serazovani (podle sloupcu)  DONE
-- Vyhledavani (nove okenko?)
-- Print option behem tvorby orderu
+- Vyhledavani (nove okenko?)  DONE
+- Print option behem tvorby orderu  DONE
 - Smazat delete tlacitko. Delete nebude mozny. Pouze archivace nebo edit  DONE
 - Vytvorit moznost statusu archivace  DONE
-- Vytvorit filtery. Defaultne neukazovat archivovane zaznamy
+- TODO Vytvorit filtery. Defaultne neukazovat archivovane zaznamy
 - Napojit to na SQLIte databazi.  DONE
 
-- Vygenerovat i email s PDF?
-- Casova priorita - Barevne odlisit podle toho jak moc to hori
-- SMS
+- TODO Vygenerovat i email s PDF?
+- TODO Casova priorita - Barevne odlisit podle toho jak moc to hori
+- TODO SMS
 
-- Potom co se dokonci(archivuje) order, zadat realne vyreseni problemu, atd. Kvuli archivaci
+- TODO Potom co se dokonci(archivuje) order, zadat realne vyreseni problemu, atd. Kvuli archivaci
 
 -TODO Popis zavady limit of characters  120 chars
 - TODO Solution limit of characters
