@@ -7,7 +7,7 @@ import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
-import com.mstancl.ordermanagertool.util.TextFieldRulesManager;
+import com.mstancl.ordermanagertool.util.TextFieldListeners;
 import com.mstancl.ordermanagertool.util.filter.FilterCriteriaComparator;
 import com.mstancl.ordermanagertool.util.filter.OrderFilter;
 import com.mstancl.ordermanagertool.util.filter.specification.*;
@@ -102,8 +102,8 @@ public class MainScreenController {
         newOrderRow.setVgrow(Priority.NEVER);
         newOrderRow.setMaxHeight(40);
 
-        TextFieldRulesManager.allowOnlyNumbersForInput(idFilter_textField);
-        TextFieldRulesManager.allowOnlyNumbersForInput(estimatedPriceFilter_textField);
+        TextFieldListeners.allowOnlyNumbersForInput(idFilter_textField);
+        TextFieldListeners.allowOnlyNumbersForInput(estimatedPriceFilter_textField);
 
         List.of(dateWhenReceivedFilterComparator_combobox, dateWhenDueFilterComparator_combobox, estimatedPriceFilterComparator_combobox)
                 .forEach(combobox -> {

@@ -6,7 +6,9 @@ import com.mstancl.ordermanagertool.dao.OrderDAO;
 import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.pojo.Customer;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.TextFieldListeners;
 import com.mstancl.ordermanagertool.util.export.AddContentToPDF;
+import com.mstancl.ordermanagertool.util.fieldColors.FieldStyle;
 import com.mstancl.ordermanagertool.util.fxml.FXMLoaderManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -14,6 +16,8 @@ import javafx.scene.control.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class OrderDetailController {
@@ -67,27 +71,64 @@ public class OrderDetailController {
     public void initialize() {
         orderStatus_comboBox.setItems(FXCollections.observableArrayList(Status.getAllNames()));
         orderStatus_comboBox.setValue(Status.NEW.getName());
+
+        TextFieldListeners.allowOnlyNumbersForInput(estimatedPrice_textField);
+
     }
 
     @FXML
     public void confirmOrder() {
         MainScreenController mainScreenController = FXMLoaderManager.getFxmLoader().getController();
 
-        Customer customer = new Customer(StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()), StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()), phoneNumber_textField.getText(), emailAddress_textField.getText());
-        Order order = new Order(orderID == -1 ? mainScreenController.listOfOrderFields.size() + 1 : orderID, customer, dateWhenReceived_datePicker.getValue(), dueDate_datePicker.getValue(), orderType_textField.getText(), description_textArea.getText(), solution_textArea.getText(), Integer.parseInt(estimatedPrice_textField.getText()), Status.getStatusByName(orderStatus_comboBox.getValue()));
+        List<TextField> listOfAllFields = List.of(
+                firstName_textField,
+                surname_textField,
+                emailAddress_textField,
+                phoneNumber_textField,
+                orderType_textField,
+                estimatedPrice_textField
+        );
 
-        mainScreenController.addOrdersToOrderGrid(order);
+        List<DatePicker> listOfDatePickers = List.of(dateWhenReceived_datePicker, dueDate_datePicker);
 
-        if (orderDAO.getRecordByID(order.getId()) == null) {
-            orderDAO.write(order);
+
+        if (listOfAllFields.stream().anyMatch(x -> x.getText().isBlank()) || listOfDatePickers.stream().anyMatch(x -> x.getValue() != null)) {
+            listOfAllFields
+                    .forEach(textField -> textField.setStyle(textField.getText().isBlank() ? FieldStyle.ERROR_STYLE.getValue() : null));
+            listOfDatePickers
+                    .forEach(datePicker -> datePicker.setStyle(datePicker.getValue() == null ? FieldStyle.ERROR_STYLE.getValue() : null));
+
         } else {
-            orderDAO.update(order);
-            mainScreenController.removeAllRowsFromOrderGrid();
-            mainScreenController.addOrdersToOrderGrid(orderDAO.getAllRecords());
+            Customer customer = new Customer(
+                    StringUtils.capitalize(firstName_textField.getText().toLowerCase().trim()),
+                    StringUtils.capitalize(surname_textField.getText().toLowerCase().trim()),
+                    phoneNumber_textField.getText(),
+                    emailAddress_textField.getText()
+            );
+            Order order = new Order(
+                    orderID == -1 ? mainScreenController.listOfOrderFields.size() + 1 : orderID,
+                    customer,
+                    dateWhenReceived_datePicker.getValue(),
+                    dueDate_datePicker.getValue(),
+                    orderType_textField.getText(),
+                    description_textArea.getText(),
+                    solution_textArea.getText(),
+                    Integer.parseInt(estimatedPrice_textField.getText()),
+                    Status.getStatusByName(orderStatus_comboBox.getValue())
+            );
+
+            mainScreenController.addOrdersToOrderGrid(order);
+
+            if (orderDAO.getRecordByID(order.getId()) == null) {
+                orderDAO.write(order);
+            } else {
+                orderDAO.update(order);
+                mainScreenController.removeAllRowsFromOrderGrid();
+                mainScreenController.addOrdersToOrderGrid(orderDAO.getAllRecords());
+            }
+
+            mainScreenController.orderDetailsStage.close();
         }
-
-        mainScreenController.orderDetailsStage.close();
-
     }
 
     @FXML
