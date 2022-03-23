@@ -34,6 +34,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MainScreenController {
 
@@ -97,7 +98,11 @@ public class MainScreenController {
     @FXML
     public void initialize() {
         removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(orderDAO.getAllRecords());
+
+
+
+        addOrdersToOrderGrid(orderDAO.getAllRecords(orderFilter, List.of(new NotMatchingStatusFilterSpecification(Status.ARCHIVED),new NotMatchingStatusFilterSpecification(Status.CANCELLED))));
+
 
         newOrderRow.setVgrow(Priority.NEVER);
         newOrderRow.setMaxHeight(40);

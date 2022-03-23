@@ -4,13 +4,14 @@ package com.mstancl.ordermanagertool.data.enums;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Status {
 
     NEW("New"),
     IN_PROGRESS("In progress"),
     DONE("Done"),
-    ARCHIVED76("Archived"),
+    ARCHIVED("Archived"),
     CANCELLED("Cancelled");
 
     private final String name;
@@ -25,7 +26,7 @@ public enum Status {
 
 
     public static List<String> getAllNames() {
-       return Arrays
+        return Arrays
                 .stream(values())
                 .map(Status::getName)
                 .toList();
@@ -38,6 +39,14 @@ public enum Status {
             }
         }
         return null;
+    }
+
+    public static List<Status> getAllStatusesExcept(Status... statusToExclude) {
+        return Arrays
+                .stream(values()).toList()
+                .stream()
+                .filter(status -> !Arrays.asList(statusToExclude).contains(status))
+                .collect(Collectors.toList());
     }
 
 

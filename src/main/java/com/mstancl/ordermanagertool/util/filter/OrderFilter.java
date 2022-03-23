@@ -8,15 +8,12 @@ import java.util.List;
 public class OrderFilter {
 
 
-    public List<Order> getFilteredOrders(List<Order> listOfOrders,Specification<Order> specification){
+    public List<Order> getOrdersMatchingSpecification(List<Order> listOfOrders, Specification<Order> specification) {
         return listOfOrders
                 .stream()
                 .filter(specification::isSatisfied)
                 .toList();
     }
-
-
-
 
 
 

@@ -5,7 +5,6 @@ import com.mstancl.ordermanagertool.database.DatabaseManager;
 import com.mstancl.ordermanagertool.util.filter.OrderFilter;
 import com.mstancl.ordermanagertool.util.filter.specification.Specification;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAO implements DAO<Order> {
@@ -34,10 +33,7 @@ public class OrderDAO implements DAO<Order> {
 
     @Override
     public List<Order> getAllRecords(OrderFilter orderFilter, Specification<Order> filter) {
-        /*for (Specification<Order> filter : listOfFilters) {
-            listOfOrdersToFilter = orderFilter.getFilteredOrders(listOfOrdersToFilter, filter);
-        }*/
-        return orderFilter.getFilteredOrders(databaseManager.returnAllRecords("test.db", "Orders"), filter);
+        return orderFilter.getOrdersMatchingSpecification(databaseManager.returnAllRecords("test.db", "Orders"), filter);
     }
 
     @Override
@@ -45,7 +41,7 @@ public class OrderDAO implements DAO<Order> {
         List<Order> listOfOrdersToFilter = getAllRecords();
 
         for (Specification<Order> filter : listOfFilters){
-            listOfOrdersToFilter = orderFilter.getFilteredOrders(listOfOrdersToFilter,filter);
+            listOfOrdersToFilter = orderFilter.getOrdersMatchingSpecification(listOfOrdersToFilter,filter);
         }
 
         return listOfOrdersToFilter;
