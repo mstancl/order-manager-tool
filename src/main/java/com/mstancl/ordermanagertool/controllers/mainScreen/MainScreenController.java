@@ -7,6 +7,7 @@ import com.mstancl.ordermanagertool.data.enums.HighlightColor;
 import com.mstancl.ordermanagertool.data.enums.Status;
 import com.mstancl.ordermanagertool.data.orderLine.OrderLineDetailFields;
 import com.mstancl.ordermanagertool.data.pojo.Order;
+import com.mstancl.ordermanagertool.util.TextFieldRulesManager;
 import com.mstancl.ordermanagertool.util.filter.FilterCriteriaComparator;
 import com.mstancl.ordermanagertool.util.filter.OrderFilter;
 import com.mstancl.ordermanagertool.util.filter.specification.*;
@@ -34,7 +35,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class MainScreenController {
 
@@ -102,17 +102,8 @@ public class MainScreenController {
         newOrderRow.setVgrow(Priority.NEVER);
         newOrderRow.setMaxHeight(40);
 
-        idFilter_textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && !newValue.matches("\\d*")) {
-                idFilter_textField.setText(newValue.replaceAll("[^\\d]", ""));
-            }
-        });
-
-        estimatedPriceFilter_textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && !newValue.matches("\\d*")) {
-                estimatedPriceFilter_textField.setText(newValue.replaceAll("[^\\d]", ""));
-            }
-        });
+        TextFieldRulesManager.allowOnlyNumbersForInput(idFilter_textField);
+        TextFieldRulesManager.allowOnlyNumbersForInput(estimatedPriceFilter_textField);
 
         List.of(dateWhenReceivedFilterComparator_combobox, dateWhenDueFilterComparator_combobox, estimatedPriceFilterComparator_combobox)
                 .forEach(combobox -> {
