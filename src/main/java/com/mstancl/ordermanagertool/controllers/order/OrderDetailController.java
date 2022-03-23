@@ -73,7 +73,7 @@ public class OrderDetailController {
         orderStatus_comboBox.setValue(Status.NEW.getName());
 
         TextFieldListeners.allowOnlyNumbersForInput(estimatedPrice_textField);
-        TextFieldListeners.limitNumberOfCharacters(description_textArea,250);
+        TextFieldListeners.limitNumberOfCharacters(description_textArea,200);
 
     }
 
