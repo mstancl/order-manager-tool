@@ -97,16 +97,7 @@ public class MainScreenController {
 
     @FXML
     public void initialize() {
-        removeAllRowsFromOrderGrid();
-
-
-        addOrdersToOrderGrid(
-                orderDAO.getAllRecords(orderFilter, List.of(
-                        new NotMatchingStatusFilterSpecification(Status.ARCHIVED),
-                        new NotMatchingStatusFilterSpecification(Status.CANCELLED))
-                )
-        );
-
+        reloadAllOrdersFromDatabase();
 
         newOrderRow.setVgrow(Priority.NEVER);
         newOrderRow.setMaxHeight(40);
@@ -277,7 +268,7 @@ public class MainScreenController {
         dateWhenReceivedFilter_datePicker.setValue(null);
         dateWhenDueFilter_datePicker.setValue(null);
         estimatedPriceFilter_textField.setText(null);
-        applyFilter();
+        reloadAllOrdersFromDatabase();
     }
 
     @FXML
@@ -306,6 +297,16 @@ public class MainScreenController {
         removeAllRowsFromOrderGrid();
         addOrdersToOrderGrid(orderDAO.getAllRecords(orderFilter, listOfFilters));
 
+    }
+
+    public void reloadAllOrdersFromDatabase() {
+        removeAllRowsFromOrderGrid();
+        addOrdersToOrderGrid(
+                orderDAO.getAllRecords(orderFilter, List.of(
+                        new NotMatchingStatusFilterSpecification(Status.ARCHIVED),
+                        new NotMatchingStatusFilterSpecification(Status.CANCELLED))
+                )
+        );
     }
 
 
