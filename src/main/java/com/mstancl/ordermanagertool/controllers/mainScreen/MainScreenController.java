@@ -100,8 +100,12 @@ public class MainScreenController {
         removeAllRowsFromOrderGrid();
 
 
-
-        addOrdersToOrderGrid(orderDAO.getAllRecords(orderFilter, List.of(new NotMatchingStatusFilterSpecification(Status.ARCHIVED),new NotMatchingStatusFilterSpecification(Status.CANCELLED))));
+        addOrdersToOrderGrid(
+                orderDAO.getAllRecords(orderFilter, List.of(
+                        new NotMatchingStatusFilterSpecification(Status.ARCHIVED),
+                        new NotMatchingStatusFilterSpecification(Status.CANCELLED))
+                )
+        );
 
 
         newOrderRow.setVgrow(Priority.NEVER);
