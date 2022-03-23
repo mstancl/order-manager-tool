@@ -16,10 +16,14 @@ module com.mstancl.ordermanagertool {
 
     exports com.mstancl.ordermanagertool.util.filter.specification;
     opens com.mstancl.ordermanagertool.util.filter.specification to javafx.fxml;
+
+    exports com.mstancl.ordermanagertool.data.orderLine;
     opens com.mstancl.ordermanagertool.data.orderLine to javafx.fxml;
 
     exports com.mstancl.ordermanagertool.util.filter;
     opens com.mstancl.ordermanagertool.util.filter to javafx.fxml;
+
+    exports com.mstancl.ordermanagertool.data.enums;
     opens com.mstancl.ordermanagertool.data.enums to javafx.fxml;
 
     exports com.mstancl.ordermanagertool.controllers.mainScreen;
