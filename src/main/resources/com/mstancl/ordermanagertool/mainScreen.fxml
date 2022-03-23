@@ -257,7 +257,7 @@
                            </rowConstraints>
                            <children>
                               <Label text="Customer name" GridPane.columnIndex="1" />
-                              <TextField fx:id="customerNumberFilter_textField" maxWidth="100.0" GridPane.columnIndex="1">
+                              <TextField fx:id="customerNameFilter_textField" maxWidth="100.0" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="130.0" />
                                  </GridPane.margin>

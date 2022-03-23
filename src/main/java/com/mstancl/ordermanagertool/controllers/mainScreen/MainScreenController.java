@@ -54,7 +54,7 @@ public class MainScreenController {
     public TextField idFilter_textField;
 
     @FXML
-    public TextField customerNumberFilter_textField;
+    public TextField customerNameFilter_textField;
 
     @FXML
     public ComboBox<String> statusFilter_comboBox;
@@ -263,7 +263,7 @@ public class MainScreenController {
     @FXML
     public void clearFilters() {
         idFilter_textField.setText(null);
-        customerNumberFilter_textField.setText(null);
+        customerNameFilter_textField.setText(null);
         statusFilter_comboBox.setValue(null);
         dateWhenReceivedFilter_datePicker.setValue(null);
         dateWhenDueFilter_datePicker.setValue(null);
@@ -278,8 +278,8 @@ public class MainScreenController {
         if (idFilter_textField.getText() != null && !idFilter_textField.getText().isBlank()) {
             listOfFilters.add(new IDFilterSpecification(Long.parseLong(idFilter_textField.getText())));
         }
-        if (customerNumberFilter_textField.getText() != null && !customerNumberFilter_textField.getText().isBlank()) {
-            listOfFilters.add(new CustomerNameFilterSpecification(customerNumberFilter_textField.getText()));
+        if (customerNameFilter_textField.getText() != null && !customerNameFilter_textField.getText().isBlank()) {
+            listOfFilters.add(new CustomerNameFilterSpecification(customerNameFilter_textField.getText()));
         }
         if (statusFilter_comboBox.getValue() != null) {
             listOfFilters.add(new StatusFilterSpecification(Status.getStatusByName(statusFilter_comboBox.getValue())));
