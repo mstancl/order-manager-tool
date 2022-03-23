@@ -34,7 +34,7 @@ public class AddContentToPDF {
         List<String> listOfWords = new ArrayList<>();
         StringBuilder line = new StringBuilder();
         for (String word : text.split(" ")) {
-            if (line.length() + word.length() > 60) {
+            if (line.length() + word.length() > 80) {
                 listOfWords.add(line.toString());
                 line = new StringBuilder();
             }

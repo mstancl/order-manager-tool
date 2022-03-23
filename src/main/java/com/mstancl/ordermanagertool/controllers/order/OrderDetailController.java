@@ -73,6 +73,7 @@ public class OrderDetailController {
         orderStatus_comboBox.setValue(Status.NEW.getName());
 
         TextFieldListeners.allowOnlyNumbersForInput(estimatedPrice_textField);
+        TextFieldListeners.limitNumberOfCharacters(description_textArea,250);
 
     }
 
@@ -92,7 +93,7 @@ public class OrderDetailController {
         List<DatePicker> listOfDatePickers = List.of(dateWhenReceived_datePicker, dueDate_datePicker);
 
 
-        if (listOfAllFields.stream().anyMatch(x -> x.getText().isBlank()) || listOfDatePickers.stream().anyMatch(x -> x.getValue() != null)) {
+        if (listOfAllFields.stream().anyMatch(x -> x.getText().isBlank()) || listOfDatePickers.stream().anyMatch(x -> x.getValue() == null)) {
             listOfAllFields
                     .forEach(textField -> textField.setStyle(textField.getText().isBlank() ? FieldStyle.ERROR_STYLE.getValue() : null));
             listOfDatePickers

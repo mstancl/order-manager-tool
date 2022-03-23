@@ -292,12 +292,13 @@ public class MainScreenController {
 
     public void reloadAllOrdersFromDatabase() {
         removeAllRowsFromOrderGrid();
-        addOrdersToOrderGrid(
+       /* addOrdersToOrderGrid(
                 orderDAO.getAllRecords(orderFilter, List.of(
                         new NotMatchingStatusFilterSpecification(Status.ARCHIVED),
                         new NotMatchingStatusFilterSpecification(Status.CANCELLED))
                 )
-        );
+        );*/
+        addOrdersToOrderGrid(orderDAO.getAllRecords());
     }
 
 
