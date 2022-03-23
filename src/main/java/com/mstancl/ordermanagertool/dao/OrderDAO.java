@@ -2,7 +2,10 @@ package com.mstancl.ordermanagertool.dao;
 
 import com.mstancl.ordermanagertool.data.pojo.Order;
 import com.mstancl.ordermanagertool.database.DatabaseManager;
+import com.mstancl.ordermanagertool.util.filter.OrderFilter;
+import com.mstancl.ordermanagertool.util.filter.specification.Specification;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAO implements DAO<Order> {
@@ -27,6 +30,25 @@ public class OrderDAO implements DAO<Order> {
     @Override
     public List<Order> getAllRecords() {
         return databaseManager.returnAllRecords("test.db", "Orders");
+    }
+
+    @Override
+    public List<Order> getAllRecords(OrderFilter orderFilter, Specification<Order> filter) {
+        /*for (Specification<Order> filter : listOfFilters) {
+            listOfOrdersToFilter = orderFilter.getFilteredOrders(listOfOrdersToFilter, filter);
+        }*/
+        return orderFilter.getFilteredOrders(databaseManager.returnAllRecords("test.db", "Orders"), filter);
+    }
+
+    @Override
+    public List<Order> getAllRecords(OrderFilter orderFilter, List<Specification<Order>> listOfFilters) {
+        List<Order> listOfOrdersToFilter = getAllRecords();
+
+        for (Specification<Order> filter : listOfFilters){
+            listOfOrdersToFilter = orderFilter.getFilteredOrders(listOfOrdersToFilter,filter);
+        }
+
+        return listOfOrdersToFilter;
     }
 
     @Override

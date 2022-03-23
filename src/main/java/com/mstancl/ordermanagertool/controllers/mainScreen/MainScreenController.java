@@ -294,15 +294,9 @@ public class MainScreenController {
             listOfFilters.add(new EstimatedPriceFilterSpecification(Long.parseLong(estimatedPriceFilter_textField.getText()), FilterCriteriaComparator.getEnum(estimatedPriceFilterComparator_combobox.getValue())));
         }
 
-        List<Order> listOfOrdersToFilter = orderDAO.getAllRecords();
-
-        for (Specification<Order> filter : listOfFilters) {
-            listOfOrdersToFilter = orderFilter.getFilteredOrders(listOfOrdersToFilter, filter);
-        }
-
         removeAllRowsFromOrderGrid();
-        listOfOrdersToFilter
-                .forEach(this::addOrdersToOrderGrid);
+        addOrdersToOrderGrid(orderDAO.getAllRecords(orderFilter, listOfFilters));
+
     }
 
 
