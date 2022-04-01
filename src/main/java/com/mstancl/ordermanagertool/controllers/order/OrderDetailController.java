@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class OrderDetailController {
@@ -73,7 +72,7 @@ public class OrderDetailController {
         orderStatus_comboBox.setValue(Status.NEW.getName());
 
         TextFieldListeners.allowOnlyNumbersForInput(estimatedPrice_textField);
-        TextFieldListeners.limitNumberOfCharacters(description_textArea,200);
+        TextFieldListeners.limitNumberOfCharacters(description_textArea, 200);
 
     }
 
@@ -118,15 +117,12 @@ public class OrderDetailController {
                     Status.getStatusByName(orderStatus_comboBox.getValue())
             );
 
-            mainScreenController.addOrdersToOrderGrid(order);
-
             if (orderDAO.getRecordByID(order.getId()) == null) {
                 orderDAO.write(order);
             } else {
                 orderDAO.update(order);
-                mainScreenController.removeAllRowsFromOrderGrid();
-                mainScreenController.addOrdersToOrderGrid(orderDAO.getAllRecords());
             }
+            mainScreenController.reloadAllOrdersFromDatabase();
 
             mainScreenController.orderDetailsStage.close();
         }

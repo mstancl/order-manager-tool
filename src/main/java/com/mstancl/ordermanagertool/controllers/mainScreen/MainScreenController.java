@@ -18,10 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -83,6 +80,20 @@ public class MainScreenController {
 
     @FXML
     public ComboBox<String> estimatedPriceFilterComparator_combobox;
+
+    @FXML
+    public Label newStatusCount_label;
+
+    @FXML
+    public Label inProgressStatusCount_label;
+
+    @FXML
+    public Label doneStatusCount_label;
+
+    @FXML
+    public Label archivedStatusCount_label;
+    @FXML
+    public Label cancelledStatusCount_label;
 
 
     public List<OrderLineDetailFields> listOfOrderFields = new ArrayList<>();
@@ -299,6 +310,17 @@ public class MainScreenController {
                 )
         );*/
         addOrdersToOrderGrid(orderDAO.getAllRecords());
+        updateStatusOrderCounter();
+    }
+
+    public void updateStatusOrderCounter() {
+        List<Order> listOfAllOrders = orderDAO.getAllRecords();
+        newStatusCount_label.setText(String.valueOf(listOfAllOrders.stream().filter(x -> x.getStatus() == Status.NEW).count()));
+        inProgressStatusCount_label.setText(String.valueOf(listOfAllOrders.stream().filter(x -> x.getStatus() == Status.IN_PROGRESS).count()));
+        doneStatusCount_label.setText(String.valueOf(listOfAllOrders.stream().filter(x -> x.getStatus() == Status.DONE).count()));
+        archivedStatusCount_label.setText(String.valueOf(listOfAllOrders.stream().filter(x -> x.getStatus() == Status.ARCHIVED).count()));
+        cancelledStatusCount_label.setText(String.valueOf(listOfAllOrders.stream().filter(x -> x.getStatus() == Status.CANCELLED).count()));
+
     }
 
 

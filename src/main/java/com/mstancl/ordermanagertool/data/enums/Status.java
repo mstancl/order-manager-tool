@@ -33,12 +33,10 @@ public enum Status {
     }
 
     public static Status getStatusByName(String name) {
-        for (Status status : values()) {
-            if (status.getName().equals(name)) {
-                return status;
-            }
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(x -> x.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 
     public static List<Status> getAllStatusesExcept(Status... statusToExclude) {
